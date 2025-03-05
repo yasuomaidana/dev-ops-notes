@@ -68,3 +68,63 @@ After installing elastic. You only need to run `sudo apt-get install kibana`
 `sudo apt-get install filebeat`
 
 [^1]: These instructions can be  found [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/deb.html).
+
+## Additional packages
+
+- **`systemctl`** is a command-line utility in Linux used to control the systemd system and service manager. It allows you to manage services, check their status, enable or disable them at startup, and perform various other system-related tasks. Important commands:
+
+  - Start a service: `sudo systemctl start`
+  - Stop a service: `sudo systemctl stop <service-name>`
+  - Enable a service to start at boot: `sudo systemctl enable <service-name>`
+  - List all active services: `sudo systemctl list-units --type=service --state=active`
+
+- **ngnix** is
+
+## Starting the services
+
+1. Run `sudo systemctl daemon-reload`, which is used to reload the systemd manager configuration. This is necessary when you have made changes to unit files (such as service files) or other configuration files that systemd uses to manage services.
+
+2. Enable all services by running
+
+```sh
+sudo systemctl enable elasticsearch.service
+
+sudo systemctl enable filebeat
+
+sudo systemctl enable logstash.service
+
+sudo systemctl enable kibana.service
+```
+
+3. Start all the services. Please before starting the service, ensure they are not running yet.
+
+```sh
+sudo systemctl start elasticsearch.service
+
+sudo systemctl start filebeat
+
+sudo systemctl start logstash.service
+
+sudo systemctl start kibana.service
+```
+
+> You can check if they are running using `ps aux | grep elastic`. You can change `elastic` by any service you want to check if is running.
+
+## Checking with ngnix
+
+Nginx (pronounced "engine-x") is a high-performance HTTP server and reverse proxy, as well as an IMAP/POP3 proxy server. It is known for its stability, rich feature set, simple configuration, and low resource consumption.
+
+In the context of the ELK stack, Nginx can be used as a reverse proxy to manage and distribute incoming traffic to the various components of the stack, such as Elasticsearch, Logstash, and Kibana. This setup can help improve security, load balancing, and performance by handling client requests more efficiently and providing an additional layer of protection.
+
+For example, you can configure Nginx to route requests to Kibana, allowing you to access the Kibana dashboard through a specific URL while securing it with SSL/TLS and basic authentication.
+
+Check logs:
+
+- `cat /var/log/nginx/access.log`
+- `cat /var/log/nginx/error.log`
+
+Check if running
+
+`ps aux | grep nginx`
+
+<!-- TODO: Add explanation about how to expose kibana, remember change the host in the kibana.yaml -->

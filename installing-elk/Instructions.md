@@ -1,4 +1,13 @@
-# Instructions
+# Instructions to install ELK and configure a server with nginx
+
+## Index
+
+- [Installing ELK stack](#installing-elk-stack)
+- [Additional packages](#additional-packages)
+- [Starting the services](#starting-the-services)
+- [Checking with nginx](#checking-with-ngnix)
+- [Exposing kibana](#exposing-kibana)
+- [Configuring filebeat](#configuring-filebeat)
 
 The easieast way to run elk is using the following command: `curl -fsSL https://elastic.co/start-local | sh`, see more information [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/run-elasticsearch-locally.html)
 
@@ -160,3 +169,50 @@ filebeat.inputs:
 
 ## More configurations
 ```
+
+## Nginx configuration
+
+Create this file `/etc/logstash/conf.d/nginx.conf`. The file `/etc/logstash/conf.d/nginx.conf` is typically used in a Logstash setup to define how Logstash should process logs from an Nginx server. Logstash is a data processing pipeline that ingests data from multiple sources, transforms it, and then sends it to a specified destination.
+
+Why We Need to Create This File
+
+- Log Ingestion: This file tells Logstash where to find the Nginx logs and how to read them.
+- Data Transformation: It defines any filters or transformations that should be applied to the logs.
+- Data Output: It specifies where the processed logs should be sent, such as Elasticsearch, a database, or another storage system.
+
+```nginx
+input {
+  beats {
+    port => "5044"
+  }
+}
+
+filter {
+  grok {
+    match => {
+      "message": "%{COMBINEDAPACHELOG}"
+    }
+  }
+}
+
+output {
+  elasticsearch {
+    hosts => ["elasticsearch:9200"]
+  }
+}
+```
+
+Configuration explanation:
+
+- **Input Section**:
+  - `beats`: Specifies that the input is from Beats, which are lightweight data shippers that send data from edge machines to Logstash or Elasticsearch.
+    - `port`: The port on which Logstash listens for incoming Beats connections.
+
+- **Filter Section**:
+  - `grok`: A plugin used to parse unstructured log data into structured data. The pattern `%{COMBINEDAPACHELOG}` is used to parse Nginx logs.
+
+- **Output Section**:
+  - `elasticsearch`: Sends the processed logs to an Elasticsearch instance.
+  - `hosts`: The address of the Elasticsearch server.
+
+This configuration ensures that Nginx logs are read, parsed, and sent to Elasticsearch for storage and analysis.

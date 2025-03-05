@@ -13,14 +13,23 @@ RUN sudo apt-get install filebeat
 ## ---- END: Installating ELK stack ----
 
 ## ---- Starting the services ----
-# Reload the systemd manager configuration
-RUN sudo systemctl daemon-reload 
+# Reload the system manager configuration
+# RUN sudo systemctl daemon-reload 
 
 # Enable the services
-RUN sudo systemctl enable elasticsearch.service
-RUN sudo systemctl enable filebeat
-RUN sudo systemctl enable logstash.service
-RUN sudo systemctl enable kibana.service
+# RUN sudo systemctl enable elasticsearch.service
+# RUN sudo systemctl enable filebeat
+# RUN sudo systemctl enable logstash.service
+# RUN sudo systemctl enable kibana.service
+
+COPY kibana.yml /kibana.yml
+COPY elasticsearch.yml /elasticsearch.yml
+
+
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
+EXPOSE 9200 9300 5601 80
 
 # Start the services
 # RUN sudo systemctl start elasticsearch.service

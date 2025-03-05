@@ -2,7 +2,7 @@
 
 The easieast way to run elk is using the following command: `curl -fsSL https://elastic.co/start-local | sh`, see more information [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/run-elasticsearch-locally.html)
 
-## In a linux environment[^1]
+## Installing elastic a linux environment[^1]
 
 1. Download and store GPG key for elastic search
 
@@ -22,10 +22,23 @@ The easieast way to run elk is using the following command: `curl -fsSL https://
     - `-dearmor`: Converts the ASCII-armored GPG key to binary format.
     - `-o` /usr/share/keyrings/elasticsearch-keyring.gpg: Specifies the output file where the binary key will be saved.
 
+4. Install `apt-transport-https`, which is a package for Debian-based systems (like Ubuntu) that allows the apt package manager to access repositories over the HTTPS protocol. By default, apt can handle HTTP, FTP, and file URIs, but not HTTPS. `sudo apt-get install apt-transport-https`
+
+5. Save the repository definition to  `/etc/apt/sources.list.d/elastic-8.x.list`. To do this, run `echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-8.x.list`
+
+6. Install elastic search `sudo apt-get update && sudo apt-get install elasticsearch`
+
+> Be careful to save the generated password, in this example we will pipe the output and save it into `install_output.txt`. But please be careful, you must follow
+
 Just run:
 
 ```sh
 wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
+
+sudo apt-get install apt-transport-https
+echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-8.x.list
+
+sudo apt-get update && sudo apt-get install elasticsearch | grep "The generated password for the elastic built-in superuser is" > install_output.txt
 ```
 
-[^1]: These instructions can be  fouund [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/deb.html).
+[^1]: These instructions can be  found [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/deb.html).

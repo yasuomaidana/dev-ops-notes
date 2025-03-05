@@ -1,7 +1,7 @@
 FROM debian:bullseye
 ## ---- Installating ELK stack ----
 # Preparing the environment
-RUN apt-get update && apt-get install -y wget sudo gnupg systemctl nginx nginx-full
+RUN apt-get update && apt-get install -y wget sudo gnupg systemctl nginx nginx-full curl vim
 # Preparing the elasticsearch installation
 RUN wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
 RUN sudo apt-get install apt-transport-https

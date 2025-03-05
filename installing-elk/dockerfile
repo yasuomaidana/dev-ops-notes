@@ -1,4 +1,5 @@
 FROM debian:bullseye
+## ---- Installating ELK stack ----
 # Preparing the environment
 RUN apt-get update && apt-get install -y wget sudo gnupg
 # Preparing the elasticsearch installation
@@ -6,4 +7,8 @@ RUN wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --d
 RUN sudo apt-get install apt-transport-https
 RUN echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-8.x.list
 RUN sudo apt-get update && sudo apt-get install elasticsearch | grep "The generated password for the elastic built-in superuser is" > install_output.txt
+RUN sudo apt-get install kibana
+RUN sudo apt-get install filebeat
+## ---- END: Installating ELK stack ----
+
 CMD [ "sh" ]

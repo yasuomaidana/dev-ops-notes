@@ -127,4 +127,36 @@ Check if running
 
 `ps aux | grep nginx`
 
-<!-- TODO: Add explanation about how to expose kibana, remember change the host in the kibana.yaml -->
+## Exposing kibana
+
+If you want to expose kibana from your docker container please be sure you are configuring this value in the `kibana.yaml`
+
+```yaml
+server.host: "0.0.0.0"
+```
+
+You need to configure this file located in: `/etc/kibana/kibana.yml`
+
+## Configuring filebeat
+
+For this example we will set the values in `/etc/filebeat/filebeat.yml`
+
+```yaml
+# This section defines the inputs for Filebeat. Inputs are used to specify the source of the data that Filebeat will collect.
+filebeat.inputs:
+
+# This specifies that the input type is log, meaning Filebeat will read log files.
+- type: log
+
+  # This is an identifier for the input configuration. It can be used to uniquely identify this particular input configuration.
+  id: my-filestream-id
+
+  # This boolean value indicates whether this input configuration is enabled (true) or not (false). When enabled, Filebeat will collect data from the specified source.
+  enabled: true
+
+  # This specifies the file paths that Filebeat should monitor for log data. The path /var/log/nginx/*.log indicates that Filebeat should read all log files in the /var/log/nginx/ directory with a .log extension.
+  paths:
+    - /var/log/nginx/*.log
+
+## More configurations
+```

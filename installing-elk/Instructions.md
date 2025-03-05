@@ -2,7 +2,19 @@
 
 The easieast way to run elk is using the following command: `curl -fsSL https://elastic.co/start-local | sh`, see more information [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/run-elasticsearch-locally.html)
 
-## Installing ELK
+## Installing ELK stack
+
+The ELK stack is a collection of three open-source products — Elasticsearch, Logstash, and Kibana — all developed, managed, and maintained by Elastic. The stack is used for searching, analyzing, and visualizing log data in real-time.
+
+- **Elasticsearch**: A search and analytics engine. It is used for storing, searching, and analyzing big volumes of data quickly and in near real-time. Elasticsearch is the heart of the ELK stack.
+
+- **Logstash**: A server-side data processing pipeline that ingests data from multiple sources simultaneously, transforms it, and then sends it to a “stash” like Elasticsearch. It is used for collecting, parsing, and storing logs for future use.
+
+- **Kibana**: A data visualization and exploration tool used for log and time-series analytics, application monitoring, and operational intelligence use cases. It provides powerful and easy-to-use features such as histograms, line graphs, pie charts, and maps.
+
+- **Filebeat**: A lightweight shipper for forwarding and centralizing log data. Installed as an agent on your servers, Filebeat monitors the log files or locations that you specify, collects log events, and forwards them either to Elasticsearch or Logstash for indexing.
+
+We call it the ELK stack because it is an acronym of the three main components: Elasticsearch, Logstash, and Kibana. Filebeat is often included in the stack, but the original name remains ELK.
 
 ### Installing elastic a debian environment[^1]
 

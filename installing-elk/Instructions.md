@@ -2,7 +2,9 @@
 
 The easieast way to run elk is using the following command: `curl -fsSL https://elastic.co/start-local | sh`, see more information [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/run-elasticsearch-locally.html)
 
-## Installing elastic a linux environment[^1]
+## Installing ELK
+
+### Installing elastic a debian environment[^1]
 
 1. Download and store GPG key for elastic search
 
@@ -40,5 +42,17 @@ echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://arti
 
 sudo apt-get update && sudo apt-get install elasticsearch | grep "The generated password for the elastic built-in superuser is" > install_output.txt
 ```
+
+### Install kibana
+
+After installing elastic. You only need to run `sudo apt-get install kibana`
+
+### Install logstash
+
+`sudo apt-get install logstash`
+
+### Install filebeat
+
+`sudo apt-get install filebeat`
 
 [^1]: These instructions can be  found [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/deb.html).

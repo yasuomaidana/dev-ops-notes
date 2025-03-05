@@ -8,10 +8,14 @@ sudo systemctl enable filebeat
 sudo systemctl enable logstash.service
 sudo systemctl enable kibana.service
 
+## Generating backup of the configuration files
 mv /etc/kibana/kibana.yml /etc/kibana/kibana.yml.bak
-# mv /etc/elasticsearch/elasticsearch.yml /etc/elasticsearch/elasticsearch.yml.bak
-# mv /elasticsearch.yml /etc/elasticsearch/elasticsearch.yml
+mv /etc/filebeat/filebeat.yml /etc/filebeat/filebeat.yml.bak
+
+## Copying the configuration files
 mv /kibana.yml /etc/kibana/kibana.yml
+mv /filebeat.yml /etc/filebeat/filebeat.yml
+mv /nginx.conf /etc/logstash/conf.d/nginx.conf
 
 # Start the services
 sudo systemctl start elasticsearch.service 

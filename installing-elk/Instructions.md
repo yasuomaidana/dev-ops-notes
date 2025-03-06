@@ -216,3 +216,7 @@ Configuration explanation:
   - `hosts`: The address of the Elasticsearch server.
 
 This configuration ensures that Nginx logs are read, parsed, and sent to Elasticsearch for storage and analysis.
+
+## NOTES
+
+It is important to have java installed wherever you are going to run this.

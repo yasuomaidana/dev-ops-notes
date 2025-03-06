@@ -5,41 +5,50 @@ RUN apt-get update && apt-get install -y wget sudo gnupg systemctl nginx nginx-f
 # Preparing the elasticsearch installation
 RUN wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
 RUN sudo apt-get install apt-transport-https
+# Install Java
+RUN apt-get install -y openjdk-11-jdk
+ENV JAVA_HOME usr/lib/jvm/java-1.11.0-openjdk-arm64
+ENV PATH $JAVA_HOME/bin:$PATH
+
 RUN echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-8.x.list
 RUN sudo apt-get update 
 RUN sudo apt-get install elasticsearch > install_output.txt
 RUN sudo apt-get install kibana
 RUN sudo apt-get install logstash
 RUN sudo apt-get install filebeat
-## ---- END: Installating ELK stack ----
-
-## ---- Starting the services ----
-# Reload the system manager configuration
-# RUN sudo systemctl daemon-reload 
-
-# Enable the services
-# RUN sudo systemctl enable elasticsearch.service
-# RUN sudo systemctl enable filebeat
-# RUN sudo systemctl enable logstash.service
-# RUN sudo systemctl enable kibana.service
-
-# RUN sudo groupadd elasticsearch
-# RUN sudo useradd -g elasticsearch elasticsearch
-
-RUN sudo chown -R elasticsearch:elasticsearch /usr/share/elasticsearch
-RUN sudo chown -R elasticsearch:elasticsearch /var/lib/elasticsearch
-RUN sudo chown -R elasticsearch:elasticsearch /etc/elasticsearch
-RUN sudo chown -R elasticsearch:elasticsearch /var/log/elasticsearch
-
-RUN sudo mkdir /var/run/elasticsearch
-RUN sudo chown elasticsearch:elasticsearch /var/run/elasticsearch
-RUN sudo chmod 755 /var/run/elasticsearch
 
 COPY kibana.yml /kibana.yml
 COPY filebeat.yaml /filebeat.yml
 COPY nginx.conf /nginx.conf
 COPY elasticsearch.yml /elasticsearch.yml
 
+## Generating backup of the configuration files
+RUN mv /etc/kibana/kibana.yml /etc/kibana/kibana.yml.bak
+RUN mv /etc/filebeat/filebeat.yml /etc/filebeat/filebeat.yml.bak
+RUN mv /etc/elasticsearch/elasticsearch.yml /etc/elasticsearch/elasticsearch.yml.bak
+
+## Copying the configuration files
+RUN mv /kibana.yml /etc/kibana/kibana.yml
+RUN mv /filebeat.yml /etc/filebeat/filebeat.yml
+RUN mv /elasticsearch.yml /etc/elasticsearch/elasticsearch.yml
+RUN mv /nginx.conf /etc/logstash/conf.d/nginx.conf
+
+RUN sudo chown -R elasticsearch:elasticsearch /usr/share/elasticsearch
+RUN sudo chown -R elasticsearch:elasticsearch /var/lib/elasticsearch
+RUN sudo chown -R elasticsearch:elasticsearch /etc/elasticsearch
+RUN sudo chown -R elasticsearch:elasticsearch /etc/default/elasticsearch
+RUN sudo chown -R elasticsearch:elasticsearch /var/log/elasticsearch
+
+RUN sudo chown -R kibana:kibana /usr/share/kibana
+RUN sudo chown -R kibana:kibana /etc/kibana
+RUN sudo chown -R kibana:kibana /var/log/kibana
+
+RUN sudo mkdir /var/run/elasticsearch
+RUN sudo chown elasticsearch:elasticsearch /var/run/elasticsearch
+RUN sudo chmod 755 /var/run/elasticsearch
+
+RUN mkdir -p /etc/elasticsearch/certs
+RUN chown -R elasticsearch:elasticsearch /etc/elasticsearch/certs
 
 COPY start.sh /start.sh
 RUN chmod +x /start.sh

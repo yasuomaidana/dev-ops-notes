@@ -1,7 +1,7 @@
 FROM debian:bullseye
 ## ---- Installating ELK stack ----
 # Preparing the environment
-RUN apt-get update && apt-get install -y wget sudo gnupg systemctl nginx nginx-full curl vim
+RUN apt-get update && apt-get install -y wget sudo gnupg systemctl nginx nginx-full curl vim 
 # Preparing the elasticsearch installation
 RUN wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
 RUN sudo apt-get install apt-transport-https
@@ -23,7 +23,21 @@ RUN sudo apt-get install filebeat
 # RUN sudo systemctl enable logstash.service
 # RUN sudo systemctl enable kibana.service
 
+# RUN sudo groupadd elasticsearch
+# RUN sudo useradd -g elasticsearch elasticsearch
+
+RUN sudo chown -R elasticsearch:elasticsearch /usr/share/elasticsearch
+RUN sudo chown -R elasticsearch:elasticsearch /var/lib/elasticsearch
+RUN sudo chown -R elasticsearch:elasticsearch /etc/elasticsearch
+RUN sudo chown -R elasticsearch:elasticsearch /var/log/elasticsearch
+
+RUN sudo mkdir /var/run/elasticsearch
+RUN sudo chown elasticsearch:elasticsearch /var/run/elasticsearch
+RUN sudo chmod 755 /var/run/elasticsearch
+
 COPY kibana.yml /kibana.yml
+COPY filebeat.yaml /filebeat.yml
+COPY nginx.conf /nginx.conf
 COPY elasticsearch.yml /elasticsearch.yml
 
 
@@ -32,12 +46,14 @@ RUN chmod +x /start.sh
 
 EXPOSE 9200 9300 5601 80
 
-# Start the services
-# RUN sudo systemctl start elasticsearch.service
-# RUN sudo systemctl start filebeat
-# RUN sudo systemctl start logstash.service
-# RUN sudo systemctl start kibana.service
-## ---- END: Starting the services ----
+
+## ---- Switch to Non-Root User ----
+
+# USER elasticsearch
+
 CMD ["/bin/bash", "-c", "/start.sh && exec /bin/bash"]
 
 # CMD ["sh", "-c", "sudo systemctl start elasticsearch.service filebeat logstash.service kibana.service && tail -f /dev/null"]
+
+# usr/share/kibana/bin/kibana-verification-code
+# cat install_output.txt | grep "The generated password for the elastic built-in superuser is : "

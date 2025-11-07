@@ -22,10 +22,7 @@ port mapping, volume mounting, and environment variables.
 ## Volume Mapping
 
 ```shell
-docker run -d --name nginx-demo -p 8080:80 \
--v ./app:/usr/share/nginx/html \
--v ./nginx/nginx.conf:/etc/nginx/nginx.conf \
-nginx:latest
+docker run -d --name nginx-demo -p 8080:80 -v ./app:/usr/share/nginx/html  -v ./nginx/nginx.conf:/etc/nginx/nginx.conf nginx:latest
 ```
 
 - `docker run`: The command to create and start a new container.
@@ -37,6 +34,33 @@ nginx:latest
 The first -v mounts your app directory to Nginx's default web root directory.
 
 The second -v mounts your custom nginx.conf over the default Nginx configuration file.
+
+## Using docker compose
+```dockerfile
+# docker-compose.yaml
+version: '3.7'
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./app:/usr/share/nginx/html
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+```
+
+You can also volume configuration a docker compose file.
+To start everything, navigate to the directory containing that file (`docker-compose.yml`) in your terminal and run:
+`docker-compose up -d`
+
+Explanation:
+- docker-compose up: This command reads your docker-compose.yml file, builds the images if necessary, and starts the services.
+  - -d: Runs the containers in detached mode, so it doesn't tie up your terminal.
+
+Your Nginx service will now be running in the background, serving the `index.html` file on http://localhost:8080.
+
+To stop and remove the containers and network created by docker-compose, run:
+`docker-compose down`
 
 > To stop and remove the container, you can run:
 > ```shell

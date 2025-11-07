@@ -19,6 +19,31 @@ port mapping, volume mounting, and environment variables.
       Multiple -p flags are allowed. To publish UDP ports append /udp. Use -P to publish all exposed ports on random
       host ports.
 
+## Volume Mapping
+
+```shell
+docker run -d --name nginx-demo -p 8080:80 \
+-v ./app:/usr/share/nginx/html \
+-v ./nginx/nginx.conf:/etc/nginx/nginx.conf \
+nginx:latest
+```
+
+- `docker run`: The command to create and start a new container.
+- `-d`: Runs the container in detached mode (in the background).
+- `--name nginx-demo`: Assigns a name to your container for easier management.
+- `-p 8080:80`: Maps port 8080 on your local machine to port 80 inside the container.
+- `-v ...`: This flag mounts a host path into the container (host:container).
+
+The first -v mounts your app directory to Nginx's default web root directory.
+
+The second -v mounts your custom nginx.conf over the default Nginx configuration file.
+
+> To stop and remove the container, you can run:
+> ```shell
+> docker stop nginx-demo
+> docker rm nginx-demo
+> ```
+
 - Volume mapping `docker run -d -v C:\data:/data --name myapp myimage`
 - Environment variables `docker run -e APP_ENV=production -e DEBUG=false myimage`
 - Combined example (interactive, volume, env)

@@ -36,7 +36,8 @@ The first -v mounts your app directory to Nginx's default web root directory.
 The second -v mounts your custom nginx.conf over the default Nginx configuration file.
 
 ## Using docker compose
-```dockerfile
+
+```yaml
 # docker-compose.yaml
 version: '3.7'
 services:

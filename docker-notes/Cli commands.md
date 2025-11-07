@@ -3,6 +3,16 @@
 ## Run
 `docker run`: Use this command to create and start a new container based on an image. You can specify options such as port mapping, volume mounting, and environment variables.
 
+- Interactive mode `docker run --rm --it python:3.11 python-container`
+  - Remove container after exit `--rm`
+  - Interactive shell `--it`
+  - Name `--name` 
+- Port mapping  `docker run -d -p 8080:80 nginx`
+  - 
+- Volume mapping `docker run -d -v C:\data:/data --name myapp myimage`
+- Environment variables `docker run -e APP_ENV=production -e DEBUG=false myimage`
+- Combined example (interactive, volume, env) `docker run --rm -it -v C:\proj:/app -w /app -e PYTHONUNBUFFERED=1 python:3.11 python`
+
 `docker ps`: This command lists the running containers on your system, providing information about their status, names, and IDs.
 
 `docker images`: Use this command to view a list of available Docker images on your system. These images serve as the blueprints for creating containers.

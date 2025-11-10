@@ -63,6 +63,28 @@ Your Nginx service will now be running in the background, serving the `index.htm
 To stop and remove the containers and network created by docker-compose, run:
 `docker-compose down`
 
+### Using names for easier management
+
+`docker compose -p example-2 up -d`
+
+
+Run one of the following commands to stop and remove the compose project named example-2:
+`docker compose -p example-2 down`
+
+To also remove volumes created by the project:
+`docker compose -p example-2 down -v`
+
+To remove images built by Compose as well:
+`docker compose -p example-2 down --rmi all -v`
+
+Or stop and remove containers in two steps:
+```shell
+docker compose -p example-2 stop
+docker compose -p example-2 rm -f
+```
+
+## Stopping and Removing Containers:
+
 > To stop and remove the container, you can run:
 > ```shell
 > docker stop nginx-demo

@@ -1,130 +1,115 @@
-# Basic Docker CLI Commands:
+# Docker CLI Command Summary
 
-## Run
+A quick reference for the most common Docker commands used in daily development.
 
-`docker run`: Use this command to create and start a new container based on an image. You can specify options such as
-port mapping, volume mounting, and environment variables.
+---
 
-- Interactive mode `docker run --rm --it python:3.11 python-container`
-    - Remove container after exit `--rm`
-    - Interactive shell `--it`
-    - Name `--name`
-- Port mapping  `docker run -d -p 8080:80 nginx`
-    - `-d` runs a container in detached (background) mode. The command returns the container ID and your terminal is not
-      attached to the container's stdin/tty. Use docker logs, docker exec, and docker stop to interact with or stop a
-      detached container. Combine with -it only when you need an interactive shell.
+## Container Lifecycle
 
-    - `-p` publishes a container port to the host. Syntax: -p hostPort:containerPort (or -p hostIP:hostPort:
-      containerPort).
-      Multiple -p flags are allowed. To publish UDP ports append /udp. Use -P to publish all exposed ports on random
-      host ports.
+### `docker run`
+Creates and starts a new container from an image.
 
-## Volume Mapping
+**Common Flags:**
+-   `-d`: Detached mode (runs in the background).
+-   `-p <host_port>:<container_port>`: Maps a port from the host to the container.
+-   `-v <host_path>:<container_path>`: Mounts a host directory (volume) into the container.
+-   `--name <container_name>`: Assigns a custom name to the container.
+-   `--rm`: Automatically removes the container when it exits.
+-   `-it`: Interactive mode (connects your terminal to the container's shell).
+-   `-e <VAR_NAME>=<value>`: Sets an environment variable inside the container.
 
+**Example:**
 ```shell
-docker run -d --name nginx-demo -p 8080:80 -v ./app:/usr/share/nginx/html  -v ./nginx/nginx.conf:/etc/nginx/nginx.conf nginx:latest
+# Run an Nginx container in the background, named "webserver", mapping port 8080
+docker run -d --name webserver -p 8080:80 nginx
 ```
 
-- `docker run`: The command to create and start a new container.
-- `-d`: Runs the container in detached mode (in the background).
-- `--name nginx-demo`: Assigns a name to your container for easier management.
-- `-p 8080:80`: Maps port 8080 on your local machine to port 80 inside the container.
-- `-v ...`: This flag mounts a host path into the container (host:container).
+### `docker stop <container_name_or_id>`
+Stops a running container gracefully.
 
-The first -v mounts your app directory to Nginx's default web root directory.
+### `docker start <container_name_or_id>`
+Starts a stopped container.
 
-The second -v mounts your custom nginx.conf over the default Nginx configuration file.
+### `docker restart <container_name_or_id>`
+Restarts a container.
 
-## Using docker compose
+### `docker rm <container_name_or_id>`
+Removes a stopped container. Use `-f` to force-remove a running container.
 
-```yaml
-# docker-compose.yaml
-version: '3.7'
-services:
-  web:
-    image: nginx:latest
-    ports:
-      - "8080:80"
-    volumes:
-      - ./app:/usr/share/nginx/html
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-```
+---
 
-You can also volume configuration a docker compose file.
-To start everything, navigate to the directory containing that file (`docker-compose.yml`) in your terminal and run:
-`docker-compose up -d`
+## Inspecting & Debugging
 
-Explanation:
-- docker-compose up: This command reads your docker-compose.yml file, builds the images if necessary, and starts the services.
-  - -d: Runs the containers in detached mode, so it doesn't tie up your terminal.
+### `docker ps`
+Lists all running containers.
+-   `docker ps -a`: Lists all containers, including stopped ones.
 
-Your Nginx service will now be running in the background, serving the `index.html` file on http://localhost:8080.
+### `docker logs <container_name_or_id>`
+Fetches the logs from a container.
+-   `-f` or `--follow`: Follows the log output in real-time.
 
-To stop and remove the containers and network created by docker-compose, run:
-`docker-compose down`
+### `docker exec -it <container_name_or_id> <command>`
+Executes a command inside a running container.
+-   **Example (get a shell inside the container):**
+    ```shell
+    docker exec -it webserver /bin/bash
+    ```
 
-### Using names for easier management
+---
 
-`docker compose -p example-2 up -d`
+## Image Management
 
+### `docker build -t <image_name>:<tag> .`
+Builds a Docker image from a `Dockerfile` in the current directory.
+-   `-t`: Tags the image with a name and optional tag.
 
-Run one of the following commands to stop and remove the compose project named example-2:
-`docker compose -p example-2 down`
+### `docker images`
+Lists all Docker images on your system.
 
-To also remove volumes created by the project:
-`docker compose -p example-2 down -v`
+### `docker rmi <image_name_or_id>`
+Removes an image. You must remove all containers using the image first.
 
-To remove images built by Compose as well:
-`docker compose -p example-2 down --rmi all -v`
+### `docker pull <image_name>:<tag>`
+Downloads an image from a registry (like Docker Hub).
 
-Or stop and remove containers in two steps:
-```shell
-docker compose -p example-2 stop
-docker compose -p example-2 rm -f
-```
+---
 
-## Stopping and Removing Containers:
+## System & Cleanup
 
-> To stop and remove the container, you can run:
-> ```shell
-> docker stop nginx-demo
-> docker rm nginx-demo
-> ```
+### `docker system prune`
+Removes all unused data: stopped containers, dangling images, and unused networks.
+-   `docker system prune -a --volumes`: **(Use with caution!)** Removes all unused images (not just dangling ones) and volumes.
 
-- Volume mapping `docker run -d -v C:\data:/data --name myapp myimage`
-- Environment variables `docker run -e APP_ENV=production -e DEBUG=false myimage`
-- Combined example (interactive, volume, env)
-  `docker run --rm -it -v C:\proj:/app -w /app -e PYTHONUNBUFFERED=1 python:3.11 python`
+---
 
-`docker ps`: This command lists the running containers on your system, providing information about their status, names,
-and IDs.
+## Docker Compose
+Manages multi-container applications. Commands are run from the directory containing the `docker-compose.yml` file.
 
-`docker images`: Use this command to view a list of available Docker images on your system. These images serve as the
-blueprints for creating containers.
+### `docker-compose up`
+Creates and starts all services defined in the `docker-compose.yml` file.
+-   `-d`: Detached mode.
+-   `--build`: Forces a rebuild of the images before starting.
 
-`docker build`: This command is used for building a Docker image from a Dockerfile, which is a script that specifies how
-to create the image.
+### `docker-compose down`
+Stops and removes all containers, networks, and volumes created by `up`.
+-   `-v`: Removes named volumes.
 
-`docker pull`: Use this command to download Docker images from a container registry, such as Docker Hub.
+### `docker-compose ps`
+Lists the status of all services.
 
-`docker stop` and `docker start`: These commands allow you to stop and start containers, respectively.
+### `docker-compose logs`
+Displays logs from all services.
+-   `docker-compose logs -f <service_name>`: Follows logs for a specific service.
 
-`docker rm`: This command removes one or more containers. Be cautious with this command, as it permanently deletes
-containers.
+### Managing Projects with Names
+By default, Docker Compose uses the current directory name for the project. You can override this with the `-p` (project name) flag for easier management.
 
-`docker rmi`: Use this command to remove one or more images. Make sure you don't need the image anymore before deleting
-it.
+-   **Start a named project:**
+    ```shell
+    docker-compose -p my-project-name up -d
+    ```
 
-## Advanced Docker CLI Usage:
-
-`docker exec`: You can execute commands inside a running container using this command. It's useful for troubleshooting
-or interacting with a container's shell.
-
-`docker logs`: This command provides access to the logs generated by a running container, which is helpful for debugging
-and monitoring.
-
-`docker-compose`: Docker Compose is a tool that allows you to define and manage multi-container applications in a single
-file. You can use the docker-compose command to start, stop, and manage these multi-container setups.
-
-`docker network`: Docker allows you to create custom networks to connect containers. This command helps you manage
-network configurations for your containers.
+-   **Stop a named project:**
+    ```shell
+    docker-compose -p my-project-name down
+    ```

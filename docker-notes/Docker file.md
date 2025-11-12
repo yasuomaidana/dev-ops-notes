@@ -136,3 +136,33 @@ These three instructions are often confused, but they serve distinct purposes:
         ```
         -   Running `docker run <image>` executes `ping -c 4 localhost`.
         -   Running `docker run <image> google.com` overrides the `CMD` and executes `ping -c 4 google.com`.
+---
+
+## Why `WORKDIR` is Preferred Over `RUN cd`
+
+This is a critical concept related to how Docker builds images in layers.
+
+Each `RUN` instruction is executed in a **new, separate shell session** on a new layer. The state from one `RUN` command (like changing a directory with `cd`) **does not persist** to the next one.
+
+### Incorrect Approach: `RUN cd`
+```dockerfile
+# This does NOT work as you might expect
+RUN cd /app
+RUN pwd 
+```
+-   The second `RUN pwd` command will print `/`, not `/app`. This is because the `cd /app` command only affected its own layer, which was immediately committed. The next layer starts fresh from the default directory (`/`).
+
+### Correct Approach: `WORKDIR`
+The `WORKDIR` instruction sets a **persistent** working directory for all subsequent instructions (`RUN`, `COPY`, `CMD`, `ENTRYPOINT`, etc.) in the Dockerfile.
+
+```dockerfile
+# This is the correct and reliable way
+WORKDIR /app
+RUN pwd
+```
+-   The `RUN pwd` command will correctly print `/app`, because the `WORKDIR` instruction modified the state for all future layers.
+
+**Key Benefits of `WORKDIR`:**
+-   **Reliability:** It guarantees that subsequent commands are run in the correct directory.
+-   **Clarity:** It makes the Dockerfile easier to read and understand.
+-   **Efficiency:** It avoids having to chain commands together with `&&` (e.g., `RUN cd /app && ./do_something.sh`), which can become messy.

@@ -155,3 +155,84 @@ services:
   # ... rest of the services
 ```
 When you run `docker-compose up`, it will automatically read the `.env` file and substitute the variables. This is great for keeping sensitive information or environment-specific settings out of your main configuration file.
+
+## 8. Running a custom name docker compose file
+
+By default, Docker Compose looks for a file named `docker-compose.yml`. If you want to use a different file, you can specify it with the `-f` flag.
+
+**Example:** Let's say you have a `custom-docker-compose.yml` in the `flask-example` directory.
+
+```bash
+docker-compose -f custom-docker-compose.yml up
+```
+
+This command will start the services defined in `custom-docker-compose.yml`.
+
+## 9. Shutting down and Turning on a specific service
+
+You can manage individual services within your Docker Compose setup.
+
+To start a specific service:
+```bash
+docker-compose up -d <service_name>
+```
+
+To stop a specific service:
+```bash
+docker-compose stop <service_name>
+```
+
+To restart a specific service:
+```bash
+docker-compose restart <service_name>
+```
+
+For example, to restart only the `web` service from our previous examples:
+```bash
+docker-compose restart web
+```
+
+## 10. Using Dockerfiles for services
+
+Instead of using a pre-built image from a registry, you can have Docker Compose build an image from a Dockerfile. This is done using the `build` context.
+
+**Example:** Let's use the `flask-example` application. The `docker-compose.yml` would look like this:
+
+```yaml
+version: '3.8'
+services:
+  web:
+    build: ./flask-example
+    ports:
+      - "5000:5000"
+  redis:
+    image: "redis:alpine"
+```
+
+In this case, Docker Compose will look for a `Dockerfile` in the `flask-example` directory, build an image from it, and then start the `web` service container.
+
+The `Dockerfile` for the `flask-example` might look something like this:
+
+```dockerfile
+# Use an official Python runtime as a parent image
+FROM python:3.8-slim
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the current directory contents into the container at /app
+COPY . /app
+
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Make port 5000 available to the world outside this container
+EXPOSE 5000
+
+# Define environment variable
+ENV NAME World
+
+# Run app.py when the container launches
+CMD ["python", "main.py"]
+```
+This setup allows you to integrate your custom application builds directly into your multi-container environment defined by Docker Compose.

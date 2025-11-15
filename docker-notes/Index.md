@@ -7,6 +7,7 @@ Here are the documents available:
 3. [Docker file](./Docker%20file.md)
 4. [Docker Multi-Stage Builds](./Docker%20Multi-Stage%20Builds.md)
 5. [Docker Compose](./docker-compose.md)
+6. [Docker Compose Commands](./docker-compose-commands.md)
 
 ## Additional projects/tools (non strictly focused on docker but helpful for pipelines)
 

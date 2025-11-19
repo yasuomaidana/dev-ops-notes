@@ -1,40 +1,46 @@
-# Kubernetes concepts
+# Kubernetes Concepts
 
-1. **Cluster**: A Kubernetes cluster is a set of nodes that run containerized applications. It consists of a control
-   plane and one or more compute machines, or nodes. The control plane is responsible for maintaining the desired state
-   of the cluster, such as which applications are running and which container images they use. Nodes are the worker
-   machines that run the applications.
+This document provides an overview of fundamental concepts in Kubernetes.
 
-2. **Deploy**: You can deploy applications on Kubernetes using Deployments. A Deployment is a Kubernetes object that
-   manages a set of identical pods. Pods are the smallest deployable units of computing that you can create and manage
-   in Kubernetes. A ReplicaSet is a Kubernetes object that ensures that a specified number of pod replicas are running
-   at any given time.
+## Core Concepts
 
-3. **Explore**: You can explore applications running on Kubernetes using `kubectl`, the Kubernetes command-line tool.
-    * `kubectl get <resource>`: Lists resources of a given type.
-    * `kubectl describe <resource> <resource-name>`: Shows detailed information about a specific resource.
-    * `kubectl logs <pod-name>`: Prints the logs for a pod.
+### Cluster
+A Kubernetes cluster is a set of nodes that run containerized applications. It's the highest level of abstraction in Kubernetes. A cluster consists of two main types of components: the **Control Plane** and **Worker Nodes**.
 
-4. **Expose**: You can expose your application to the internet so that users can access it.
-    * **Service**: An abstract way to expose an application running on a set of Pods as a network service.
-    * **NodePort**: Exposes the Service on each Node’s IP at a static port (the `NodePort`).
-    * **LoadBalancer**: Exposes the Service externally using a cloud provider’s load balancer.
-    * **Ingress**: An API object that manages external access to the services in a cluster, typically HTTP. Ingress may
-      provide load balancing, SSL termination, and name-based virtual hosting.
+- **Control Plane**: The brain of the cluster. It's responsible for making global decisions about the cluster (e.g., scheduling) and detecting and responding to cluster events. The control plane's components include:
+    - **kube-apiserver**: Exposes the Kubernetes API. It's the front end for the Kubernetes control plane.
+    - **etcd**: A consistent and highly-available key-value store used as Kubernetes' backing store for all cluster data.
+    - **kube-scheduler**: Watches for newly created Pods with no assigned node and selects a node for them to run on.
+    - **kube-controller-manager**: Runs controller processes. These controllers include the Node controller, Replication controller, Endpoints controller, and Service Account & Token controllers.
 
-5. **Scale**: You can scale your application by increasing or decreasing the number of replicas.
-    * `kubectl scale deployment <deployment-name> --replicas=<number-of-replicas>`: Manually scales a deployment.
-    * **Horizontal Pod Autoscaler (HPA)**: Automatically scales the number of pods in a replication controller,
-      deployment, replica set or stateful set based on observed CPU utilization.
+- **Worker Node**: A worker machine in Kubernetes, which may be a VM or a physical machine. Each node is managed by the control plane and contains the services necessary to run Pods. Components on a node include:
+    - **kubelet**: An agent that runs on each node in the cluster. It makes sure that containers are running in a Pod.
+    - **kube-proxy**: A network proxy that runs on each node in your cluster, implementing part of the Kubernetes Service concept.
+    - **Container Runtime**: The software that is responsible for running containers (e.g., Docker, containerd).
 
-6. **Iterate**: You can update your application by applying a new version of the container image. Kubernetes Deployments
-   allow for rolling updates, which means you can update your application without any downtime. During a rolling update,
-   the Deployment ensures that only a certain number of pods are down at the same time and that new pods are created to
-   replace the old ones.
+### Node
+A Node is a worker machine in Kubernetes. It's where your application's containers are deployed and run. Each node in the cluster is managed by the control plane.
 
+### Pod
+A Pod is the smallest and simplest unit in the Kubernetes object model that you create or deploy. A Pod represents a single instance of a running process in your cluster. Pods contain one or more containers, such as Docker containers. When a Pod runs multiple containers, the containers are managed as a single entity and share the Pod's resources.
 
-## Concepts:
+### Service
+A Service is an abstract way to expose an application running on a set of Pods as a network service. With Kubernetes, you don't need to modify your application to use an unfamiliar service discovery mechanism. Kubernetes gives Pods their own IP addresses and a single DNS name for a set of Pods, and can load-balance across them.
 
-Cluster:
-Node: 
-Pod:
+### Deployment
+A Deployment provides declarative updates for Pods and ReplicaSets. You describe a desired state in a Deployment, and the Deployment Controller changes the actual state to the desired state at a controlled rate. You can define Deployments to create new ReplicaSets, or to remove existing Deployments and adopt all their resources with new Deployments.
+
+### ReplicaSet
+A ReplicaSet's purpose is to maintain a stable set of replica Pods running at any given time. As such, it's often used to guarantee the availability of a specified number of identical Pods.
+
+## Other Important Concepts
+
+### Ingress
+An API object that manages external access to the services in a cluster, typically HTTP. Ingress can provide load balancing, SSL termination, and name-based virtual hosting.
+
+### Horizontal Pod Autoscaler (HPA)
+Automatically scales the number of pods in a replication controller, deployment, replica set, or stateful set based on observed CPU utilization or with custom metrics.
+
+### Persistent Volume (PV) and Persistent Volume Claim (PVC)
+- **Persistent Volume (PV)**: A piece of storage in the cluster that has been provisioned by an administrator or dynamically provisioned using Storage Classes. It is a resource in the cluster just like a node is a cluster resource.
+- **Persistent Volume Claim (PVC)**: A request for storage by a user. It is similar to a Pod. Pods consume node resources and PVCs consume PV resources. Pods can request specific levels of resources (CPU and Memory). Claims can request specific size and access modes.

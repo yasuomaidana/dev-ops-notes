@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c6d903d1-d806-4010-9f8f-56a81c343aba" name="Changes" comment="Add Docker Notes Index with links to documentation" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dockerfile" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" url="file://$PROJECT_DIR$/../../../../../Program Files/Go" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;yasuomaidana&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/yasuomaidana/dev-ops-notes.git&quot;,
+    &quot;accountId&quot;: &quot;14379e9c-1199-4e12-b942-bf37e12d4934&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="35AQRUtVWx8d0NLtcbVgVfJTIgW" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.GoLinterPluginOnboarding": "true",
+    "RunOnceActivity.GoLinterPluginStorageMigration": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "git-widget-placeholder": "COUR-1991-kubernetes-container-orchestration-in-action",
+    "go.import.settings.migrated": "true",
+    "go.sdk.automatically.set": "true",
+    "last_opened_file_path": "C:/Users/yasuo.maidana/GolandProjects/dev-ops-notes/docker-notes",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\yasuo.maidana\GolandProjects\dev-ops-notes\docker-notes" />
+      <recent name="C:\Users\yasuo.maidana\GolandProjects\dev-ops-notes\docker-notes\dockerfile_Example" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-gosdk-f466f9b0953e-146d08934cbf-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-252.27397.100" />
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-GO-252.27397.100" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c6d903d1-d806-4010-9f8f-56a81c343aba" name="Changes" comment="" />
+      <created>1762550387824</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1762550387824</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add initial project configuration files and .gitignore" />
+    <MESSAGE value="Add basic Docker CLI commands documentation" />
+    <MESSAGE value="Add examples for Docker run command options in documentation" />
+    <MESSAGE value="Improve formatting and clarity in Docker CLI commands documentation" />
+    <MESSAGE value="Add Docker configuration files and example for volume mapping" />
+    <MESSAGE value="Add Docker Compose example for Nginx service and improve volume mapping instructions" />
+    <MESSAGE value="Update documentation to use YAML syntax for Docker Compose example" />
+    <MESSAGE value="Add examples for managing Docker Compose projects with named configurations" />
+    <MESSAGE value="Revise Docker CLI commands documentation for clarity and organization" />
+    <MESSAGE value="Add documentation for understanding Docker networking and common network drivers" />
+    <MESSAGE value="Add reference documentation for common Dockerfile instructions" />
+    <MESSAGE value="Enhance Dockerfile documentation with detailed explanations for COPY, RUN, CMD, and ENTRYPOINT instructions" />
+    <MESSAGE value="Add explanation for using WORKDIR over RUN cd in Dockerfile" />
+    <MESSAGE value="Add documentation for understanding Docker multi-stage builds" />
+    <MESSAGE value="Add initial Dockerfile with a simple ENTRYPOINT command" />
+    <MESSAGE value="Add .gitignore file to exclude default and editor-specific files" />
+    <MESSAGE value="Add XML configuration files for migration state services" />
+    <MESSAGE value="Add Flask application with environment variable greeting" />
+    <MESSAGE value="Add Docker Compose documentation for multi-container applications" />
+    <MESSAGE value="Add custom Docker Compose file and update documentation for service management" />
+    <MESSAGE value="Add Docker Notes Index with links to documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Docker Notes Index with links to documentation" />
+  </component>
+  <component name="VgoProject">
+    <settings-migrated>true</settings-migrated>
+  </component>
+</project>

@@ -1,0 +1,2 @@
+try:
+	echo "HI"

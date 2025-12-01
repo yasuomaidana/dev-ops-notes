@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2976f58d-3542-448a-ad16-4f74b0830030" name="Changes" comment="Add XML configuration files for migration state services" />
+    <list default="true" id="2976f58d-3542-448a-ad16-4f74b0830030" name="Changes" comment="Add XML configuration files for migration state services">
+      <changelist_data name="yasuomaidana" email="yasuomaidana@gmail.com" automatic="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -102,6 +104,7 @@
     <MESSAGE value="COUR-1991: Add links to Kubernetes lab and additional learning materials in Index.md" />
     <MESSAGE value="Add XML configuration files for migration state services" />
     <option name="LAST_COMMIT_MESSAGE" value="Add XML configuration files for migration state services" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

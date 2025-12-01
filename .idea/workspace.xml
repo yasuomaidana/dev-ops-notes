@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2976f58d-3542-448a-ad16-4f74b0830030" name="Changes" comment="Add changelist data to workspace configuration">
-      <change afterPath="$PROJECT_DIR$/AZ-900 Prep/Index.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AZ-900 Prep/Quick-AI-models-overview.md" afterDir="false" />
+    <list default="true" id="2976f58d-3542-448a-ad16-4f74b0830030" name="Changes" comment="Add overview for Quick AI models and update workspace configuration">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AZ-900 Prep/Quick-AI-models-overview.md" beforeDir="false" afterPath="$PROJECT_DIR$/AZ-900 Prep/Quick-AI-models-overview.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +110,8 @@
     <MESSAGE value="COUR-1991: Add links to Kubernetes lab and additional learning materials in Index.md" />
     <MESSAGE value="Add XML configuration files for migration state services" />
     <MESSAGE value="Add changelist data to workspace configuration" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add changelist data to workspace configuration" />
+    <MESSAGE value="Add overview for Quick AI models and update workspace configuration" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add overview for Quick AI models and update workspace configuration" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="VgoProject">

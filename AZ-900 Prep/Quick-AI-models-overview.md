@@ -20,3 +20,27 @@ which can lead to better performance on a variety of natural language processing
 text summarization, and question answering.
 
 ![Transformer model](./assets/transformers.png)
+
+
+## Application in business functions
+
+1. Marketing and customer engagement
+   * Email marketing campaigns
+   * Dynamic web content
+2. Enhance
+   * Engagement
+   * Conversion rates (personalized content)
+3. Operations and logistics
+   * Forecast demand trends
+   * Simulate supply chain scenarios
+   * Recommend adjustments
+4. Enables business to:
+   * Make informed decisions 
+   * Reduce costs
+   * Improve services
+5. Technical refinement of documents
+6. Mimic writing styles
+   * Tone
+   * Style
+   * Audience engagement
+   * Adapt

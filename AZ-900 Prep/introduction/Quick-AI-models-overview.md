@@ -10,7 +10,7 @@ the difference between the real data and the fake data created by the generator.
 in a zero-sum game, where the generator tries to fool the discriminator and the discriminator tries to correctly
 identify the fake data. This process allows the generator to create increasingly realistic data over time.
 
-![GAN model](./assets/GAN.png)
+![GAN model](../assets/GAN.png)
 
 ## Transformers
 
@@ -19,7 +19,7 @@ parts of an input sequence. This allows the model to pay more attention to the m
 which can lead to better performance on a variety of natural language processing tasks, such as machine translation,
 text summarization, and question answering.
 
-![Transformer model](./assets/transformers.png)
+![Transformer model](../assets/transformers.png)
 
 ## Tokenization
 

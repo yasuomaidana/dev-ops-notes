@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2976f58d-3542-448a-ad16-4f74b0830030" name="Changes" comment="Add tokenization and NLP techniques overview to Quick AI models documentation">
-      <change afterPath="$PROJECT_DIR$/AZ-900 Prep/Cloud Core Concepts.md" afterDir="false" />
+    <list default="true" id="2976f58d-3542-448a-ad16-4f74b0830030" name="Changes" comment="Add cloud core concepts overview to documentation">
+      <change afterPath="$PROJECT_DIR$/AZ-900 Prep/Ensuring security and compliance.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AZ-900 Prep/Index.md" beforeDir="false" afterPath="$PROJECT_DIR$/AZ-900 Prep/Index.md" afterDir="false" />
     </list>
@@ -115,7 +115,8 @@
     <MESSAGE value="Add transformer model overview to Quick AI models documentation" />
     <MESSAGE value="Add application use cases for transformer models in business functions" />
     <MESSAGE value="Add tokenization and NLP techniques overview to Quick AI models documentation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add tokenization and NLP techniques overview to Quick AI models documentation" />
+    <MESSAGE value="Add cloud core concepts overview to documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add cloud core concepts overview to documentation" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="VgoProject">

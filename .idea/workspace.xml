@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2976f58d-3542-448a-ad16-4f74b0830030" name="Changes" comment="Update index with new cloud computing topics and correct asset paths">
-      <change afterPath="$PROJECT_DIR$/AZ-900 Prep/introduction/Cloud services models.md" afterDir="false" />
+    <list default="true" id="2976f58d-3542-448a-ad16-4f74b0830030" name="Changes" comment="Add cloud services models documentation with deployment options and service models">
+      <change afterPath="$PROJECT_DIR$/AZ-900 Prep/introduction/Deployment model selection.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AZ-900 Prep/assets/Responsabilities.png" beforeDir="false" afterPath="$PROJECT_DIR$/AZ-900 Prep/assets/Responsibilities.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AZ-900 Prep/Index.md" beforeDir="false" afterPath="$PROJECT_DIR$/AZ-900 Prep/Index.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +120,8 @@
     <MESSAGE value="Add cloud security essentials guide and compliance considerations" />
     <MESSAGE value="Refactor documentation structure and update asset paths" />
     <MESSAGE value="Update index with new cloud computing topics and correct asset paths" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update index with new cloud computing topics and correct asset paths" />
+    <MESSAGE value="Add cloud services models documentation with deployment options and service models" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add cloud services models documentation with deployment options and service models" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="VgoProject">

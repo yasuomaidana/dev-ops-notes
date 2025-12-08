@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2976f58d-3542-448a-ad16-4f74b0830030" name="Changes" comment="COUR-1995: Revise Core Service Categories documentation to enhance clarity and detail across compute, storage, database, networking, AI, IoT, management, and security services">
+    <list default="true" id="2976f58d-3542-448a-ad16-4f74b0830030" name="Changes" comment="COUR-1995: Revise Core Service Categories documentation to include Azure concepts and enhance clarity on key terms and definitions">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AZ-900 Prep/exploring/Core Service Categories.md" beforeDir="false" afterPath="$PROJECT_DIR$/AZ-900 Prep/exploring/Core Service Categories.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -132,7 +133,8 @@
     <MESSAGE value="Add deployment model selection documentation with use cases and features" />
     <MESSAGE value="COUR-1995: Add Core Service Categories documentation" />
     <MESSAGE value="COUR-1995: Revise Core Service Categories documentation to enhance clarity and detail across compute, storage, database, networking, AI, IoT, management, and security services" />
-    <option name="LAST_COMMIT_MESSAGE" value="COUR-1995: Revise Core Service Categories documentation to enhance clarity and detail across compute, storage, database, networking, AI, IoT, management, and security services" />
+    <MESSAGE value="COUR-1995: Revise Core Service Categories documentation to include Azure concepts and enhance clarity on key terms and definitions" />
+    <option name="LAST_COMMIT_MESSAGE" value="COUR-1995: Revise Core Service Categories documentation to include Azure concepts and enhance clarity on key terms and definitions" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="VgoProject">

@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2976f58d-3542-448a-ad16-4f74b0830030" name="Changes" comment="Add cloud services models summarize table">
-      <change afterPath="$PROJECT_DIR$/AZ-900 Prep/exploring/Core Service Categories.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AZ-900 Prep/Index.md" beforeDir="false" afterPath="$PROJECT_DIR$/AZ-900 Prep/Index.md" afterDir="false" />
+    <list default="true" id="2976f58d-3542-448a-ad16-4f74b0830030" name="Changes" comment="COUR-1995: Add Core Service Categories documentation">
+      <change beforePath="$PROJECT_DIR$/AZ-900 Prep/exploring/Core Service Categories.md" beforeDir="false" afterPath="$PROJECT_DIR$/AZ-900 Prep/exploring/Core Service Categories.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,7 +130,8 @@
     <MESSAGE value="Update index with new cloud computing topics and correct asset paths" />
     <MESSAGE value="Add cloud services models documentation with deployment options and service models" />
     <MESSAGE value="Add deployment model selection documentation with use cases and features" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add deployment model selection documentation with use cases and features" />
+    <MESSAGE value="COUR-1995: Add Core Service Categories documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="COUR-1995: Add Core Service Categories documentation" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="VgoProject">

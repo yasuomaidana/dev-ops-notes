@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2976f58d-3542-448a-ad16-4f74b0830030" name="Changes" comment="Add deployment model selection documentation with use cases and features">
+    <list default="true" id="2976f58d-3542-448a-ad16-4f74b0830030" name="Changes" comment="COUR-1995: Add glossary section to high availability in Azure documentation">
+      <change afterPath="$PROJECT_DIR$/AZ-900 Prep/exploring/Load Balancer.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AZ-900 Prep/introduction/Cloud services models.md" beforeDir="false" afterPath="$PROJECT_DIR$/AZ-900 Prep/introduction/Cloud services models.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AZ-900 Prep/Index.md" beforeDir="false" afterPath="$PROJECT_DIR$/AZ-900 Prep/Index.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +23,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="docker-practice" />
+        <entry key="$PROJECT_DIR$" value="COUR-1994-introduction-to-cloud-computing" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -37,6 +38,16 @@
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/yasuomaidana/dev-ops-notes.git&quot;,
     &quot;accountId&quot;: &quot;14379e9c-1199-4e12-b942-bf37e12d4934&quot;
+  },
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
+    },
+    &quot;owner&quot;: &quot;yasuomaidana&quot;,
+    &quot;repository&quot;: &quot;dev-ops-notes&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -48,27 +59,29 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.GoLinterPluginOnboarding&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.GoLinterPluginStorageMigration&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;COUR-1994-introduction-to-cloud-computing&quot;,
-    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/yasuo.maidana&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.GoLinterPluginOnboarding": "true",
+    "RunOnceActivity.GoLinterPluginOnboardingV2": "true",
+    "RunOnceActivity.GoLinterPluginStorageMigration": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "git-widget-placeholder": "COUR-1995-exploring-core-azure-services",
+    "go.import.settings.migrated": "true",
+    "go.sdk.automatically.set": "true",
+    "last_opened_file_path": "C:/Users/yasuo.maidana",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\yasuo.maidana\GolandProjects\dev-ops-notes\AZ-900 Prep\introduction" />
@@ -78,8 +91,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-gosdk-f466f9b0953e-61a6b8fd16fd-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-252.28238.32" />
-        <option value="bundled-js-predefined-d6986cc7102b-a71380e98a7c-JavaScript-GO-252.28238.32" />
+        <option value="bundled-gosdk-72a9cf600ed8-448e06e64ec5-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-253.28294.337" />
+        <option value="bundled-js-predefined-d6986cc7102b-c7e53b3be11b-JavaScript-GO-253.28294.337" />
       </set>
     </attachedChunks>
   </component>
@@ -121,11 +134,14 @@
     <MESSAGE value="Update index with new cloud computing topics and correct asset paths" />
     <MESSAGE value="Add cloud services models documentation with deployment options and service models" />
     <MESSAGE value="Add deployment model selection documentation with use cases and features" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add deployment model selection documentation with use cases and features" />
+    <MESSAGE value="COUR-1995: Add Core Service Categories documentation" />
+    <MESSAGE value="COUR-1995: Revise Core Service Categories documentation to enhance clarity and detail across compute, storage, database, networking, AI, IoT, management, and security services" />
+    <MESSAGE value="COUR-1995: Revise Core Service Categories documentation to include Azure concepts and enhance clarity on key terms and definitions" />
+    <MESSAGE value="COUR-1995: Revise Core Service Categories documentation to enhance clarity and detail, including a new section on selecting Azure services for specific use cases." />
+    <MESSAGE value="COUR-1995: Add introduction to high availability in Azure documentation and update index" />
+    <MESSAGE value="COUR-1995: Add glossary section to high availability in Azure documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="COUR-1995: Add glossary section to high availability in Azure documentation" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
-  </component>
-  <component name="VgoProject">
-    <settings-migrated>true</settings-migrated>
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

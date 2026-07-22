@@ -1,0 +1,189 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "vmName": {
+      "type": "string",
+      "defaultValue": "vm1",
+      "metadata": { "description": "Name of the virtual machine." }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "mexicocentral",
+      "metadata": { "description": "Azure region for every resource." }
+    },
+    "availabilityZone": {
+      "type": "string",
+      "defaultValue": "1",
+      "allowedValues": ["1", "2", "3"],
+      "metadata": { "description": "Availability Zone. The selected VM size must be available in this zone." }
+    },
+    "vmSize": {
+      "type": "string",
+      "defaultValue": "Standard_B1ls"
+    },
+    "adminUsername": {
+      "type": "string",
+      "defaultValue": "azureuser"
+    },
+    "adminPublicKey": {
+      "type": "secureString",
+      "metadata": { "description": "Contents of an RSA SSH public key; never a private key." }
+    },
+    "virtualNetworkName": { "type": "string", "defaultValue": "vnet-mexicocentral-1" },
+    "subnetName": { "type": "string", "defaultValue": "snet-mexicocentral-1" },
+    "publicIpName": { "type": "string", "defaultValue": "vm1-ip" },
+    "networkInterfaceName": { "type": "string", "defaultValue": "vm1-nic" },
+    "networkSecurityGroupName": { "type": "string", "defaultValue": "vm1-nsg" },
+    "osDiskSizeGB": {
+      "type": "int",
+      "defaultValue": 32,
+      "minValue": 32,
+      "metadata": { "description": "Provisioned Premium SSD OS disk size in GiB." }
+    }
+  },
+  "variables": {
+    "nsgResourceId": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]",
+    "subnetResourceId": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('subnetName'))]",
+    "publicIpResourceId": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIpName'))]",
+    "nicResourceId": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaceName'))]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2024-05-01",
+      "name": "[parameters('networkSecurityGroupName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "securityRules": [
+          {
+            "name": "Allow-SSH",
+            "properties": {
+              "priority": 1000,
+              "access": "Allow",
+              "direction": "Inbound",
+              "protocol": "Tcp",
+              "sourcePortRange": "*",
+              "destinationPortRange": "22",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks",
+      "apiVersion": "2024-05-01",
+      "name": "[parameters('virtualNetworkName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "addressSpace": { "addressPrefixes": ["10.0.0.0/16"] },
+        "subnets": [
+          {
+            "name": "[parameters('subnetName')]",
+            "properties": {
+              "addressPrefix": "10.0.0.0/24",
+              "networkSecurityGroup": { "id": "[variables('nsgResourceId')]" }
+            }
+          }
+        ]
+      },
+      "dependsOn": ["[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"]
+    },
+    {
+      "type": "Microsoft.Network/publicIPAddresses",
+      "apiVersion": "2024-05-01",
+      "name": "[parameters('publicIpName')]",
+      "location": "[parameters('location')]",
+      "zones": ["[parameters('availabilityZone')]"],
+      "sku": { "name": "Standard" },
+      "properties": {
+        "publicIPAllocationMethod": "Static",
+        "publicIPAddressVersion": "IPv4"
+      }
+    },
+    {
+      "type": "Microsoft.Network/networkInterfaces",
+      "apiVersion": "2024-05-01",
+      "name": "[parameters('networkInterfaceName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "enableAcceleratedNetworking": false,
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": { "id": "[variables('subnetResourceId')]" },
+              "publicIPAddress": { "id": "[variables('publicIpResourceId')]" }
+            }
+          }
+        ]
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+        "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIpName'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Compute/virtualMachines",
+      "apiVersion": "2024-07-01",
+      "name": "[parameters('vmName')]",
+      "location": "[parameters('location')]",
+      "zones": ["[parameters('availabilityZone')]"],
+      "properties": {
+        "hardwareProfile": { "vmSize": "[parameters('vmSize')]" },
+        "securityProfile": {
+          "securityType": "TrustedLaunch",
+          "uefiSettings": { "secureBootEnabled": true, "vTpmEnabled": true }
+        },
+        "storageProfile": {
+          "imageReference": { "publisher": "Debian", "offer": "debian-12", "sku": "12", "version": "latest" },
+          "osDisk": {
+            "name": "[format('{0}-osdisk', parameters('vmName'))]",
+            "createOption": "FromImage",
+            "diskSizeGB": "[parameters('osDiskSizeGB')]",
+            "deleteOption": "Delete",
+            "managedDisk": { "storageAccountType": "Premium_LRS" }
+          }
+        },
+        "osProfile": {
+          "computerName": "[parameters('vmName')]",
+          "adminUsername": "[parameters('adminUsername')]",
+          "linuxConfiguration": {
+            "disablePasswordAuthentication": true,
+            "provisionVMAgent": true,
+            "patchSettings": { "patchMode": "ImageDefault", "assessmentMode": "ImageDefault" },
+            "ssh": {
+              "publicKeys": [
+                {
+                  "path": "[format('/home/{0}/.ssh/authorized_keys', parameters('adminUsername'))]",
+                  "keyData": "[parameters('adminPublicKey')]"
+                }
+              ]
+            }
+          }
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            { "id": "[variables('nicResourceId')]", "properties": { "deleteOption": "Detach", "primary": true } }
+          ]
+        },
+        "diagnosticsProfile": { "bootDiagnostics": { "enabled": true } }
+      },
+      "dependsOn": ["[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaceName'))]"]
+    }
+  ],
+  "outputs": {
+    "vmResourceId": { "type": "string", "value": "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]" },
+    "publicIpAddress": {
+      "type": "string",
+      "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIpName')), '2024-05-01').ipAddress]"
+    },
+    "sshCommand": {
+      "type": "string",
+      "value": "[format('ssh {0}@{1}', parameters('adminUsername'), reference(resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIpName')), '2024-05-01').ipAddress)]"
+    }
+  }
+}

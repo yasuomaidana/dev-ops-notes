@@ -1,0 +1,17 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "vmName": { "value": "vm1" },
+    "location": { "value": "mexicocentral" },
+    "availabilityZone": { "value": "1" },
+    "vmSize": { "value": "Standard_B1ls" },
+    "adminUsername": { "value": "azureuser" },
+    "virtualNetworkName": { "value": "vnet-mexicocentral-1" },
+    "subnetName": { "value": "snet-mexicocentral-1" },
+    "publicIpName": { "value": "vm1-ip" },
+    "networkInterfaceName": { "value": "vm1-nic" },
+    "networkSecurityGroupName": { "value": "vm1-nsg" },
+    "osDiskSizeGB": { "value": 32 }
+  }
+}

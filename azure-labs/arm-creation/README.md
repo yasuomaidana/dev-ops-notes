@@ -1,17 +1,18 @@
-# ARM virtual-machine creation lab
+# Bicep virtual-machine creation lab
 
-This project creates the Azure resources for a Debian 12 virtual machine (VM) from ARM JSON templates. It is designed
-for a GoLand + Azure CLI workflow: GoLand edits JSON and the integrated terminal runs Azure commands. The Azure Toolkit
-is not required.
+This project creates the Azure resources for a Debian 12 virtual machine (VM) from Bicep source files. Azure Resource
+Manager still receives JSON at deployment time, but Bicep is the modern authoring format and compiles to that JSON for
+you. The workflow is designed for GoLand + Azure CLI: GoLand edits `.bicep` files and the integrated terminal runs
+Azure commands. The Azure Toolkit is not required.
 
 ## Files
 
 | File                                                         | Purpose                                                                                                                            |
 |--------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
-| `azuredeploy.json`                                           | ARM template: NSG, VNet/subnet, Standard public IP, NIC, managed OS disk, and VM.                                                  |
-| `azuredeploy.parameters.json`                                | Non-secret deployment choices: names, Mexico Central, zone 1, B1ls, and a 32 GiB OS disk.                                          |
-| [`docs/arm-template-basics.md`](docs/arm-template-basics.md) | Beginner-friendly explanation of ARM template sections, parameters, variables, resources, outputs, API versions, and dependencies. |
-| [`examples/`](examples/README.md)                            | Separate, deployable starter, storage-account, and Windows VM/NIC template examples.                                               |
+| `azuredeploy.bicep`                                          | Primary Bicep source: NSG, VNet/subnet, Standard public IP, NIC, managed OS disk, and VM.                                          |
+| `azuredeploy.bicepparam`                                     | Non-secret deployment choices: names, Mexico Central, zone 1, B1ls, and a 32 GiB OS disk.                                          |
+| [`docs/arm-template-basics.md`](docs/arm-template-basics.md) | Beginner-friendly explanation of Bicep structure, parameters, variables, resources, outputs, API versions, and dependencies.       |
+| [`examples/`](examples/README.md)                            | Smaller reference examples; some are still JSON so you can compare Bicep authoring with raw ARM output.                             |
 
 ## Azure CLI quick reference
 
@@ -28,9 +29,9 @@ require the template, parameter, and SSH-key arguments shown in their respective
 | Resource groups          | `az group create --name $resourceGroup --location $location`                                               | Create a resource group.                                 |
 | Resource groups          | `az group exists --name $resourceGroup`                                                                    | Check whether a resource group still exists.             |
 | Resource groups          | `az group delete --name $resourceGroup --yes --no-wait`                                                    | Delete the lab resource group asynchronously.            |
-| Deployments              | `az deployment group validate ...`                                                                         | Validate an ARM deployment before creating resources.    |
+| Deployments              | `az deployment group validate ...`                                                                         | Validate a Bicep deployment before creating resources.   |
 | Deployments              | `az deployment group what-if ...`                                                                          | Preview resource changes.                                |
-| Deployments              | `az deployment group create ...`                                                                           | Create or update resources from an ARM template.         |
+| Deployments              | `az deployment group create ...`                                                                           | Create or update resources from a Bicep file.            |
 | Deployments              | `az deployment group show --resource-group $resourceGroup --name $deploymentName --output jsonc`           | Show deployment state and outputs.                       |
 | Deployments              | `az deployment group list --resource-group $resourceGroup --output table`                                  | List resource-group deployments.                         |
 | Deployments              | `az deployment group wait --resource-group $resourceGroup --name $deploymentName --created`                | Wait for a deployment to complete.                       |
@@ -61,8 +62,8 @@ the Internet for lab access.
 
 ## Prepare GoLand and Azure CLI
 
-Install the **Bicep** plugin in GoLand at **Settings → Plugins → Marketplace → Bicep**. It adds Bicep language support
-if you later choose to author Bicep; JSON ARM templates work directly in GoLand without it.
+Install the **Bicep** plugin in GoLand at **Settings → Plugins → Marketplace → Bicep**. It provides syntax support,
+completion, and validation for `.bicep` files.
 
 In GoLand's integrated PowerShell terminal, authenticate and install the Bicep CLI:
 
@@ -115,19 +116,18 @@ $location = "mexicocentral"
 $deploymentName = "vm1-deployment"
 ```
 
-Check the JSON locally, create the empty resource group, then validate with Azure:
+Build the Bicep locally, create the empty resource group, then validate with Azure:
 
 ```powershell
-Get-Content .\azuredeploy.json -Raw | ConvertFrom-Json | Out-Null
-Get-Content .\azuredeploy.parameters.json -Raw | ConvertFrom-Json | Out-Null
+az bicep build --file .\azuredeploy.bicep --stdout | Out-Null
 
 az group create --name $resourceGroup --location $location
 
 az deployment group validate `
   --resource-group $resourceGroup `
   --name $deploymentName `
-  --template-file .\azuredeploy.json `
-  --parameters .\azuredeploy.parameters.json "adminPublicKey=$sshPublicKey"
+  --template-file .\azuredeploy.bicep `
+  --parameters .\azuredeploy.bicepparam "adminPublicKey=$sshPublicKey"
 ```
 
 Preview the exact resource changes before creation:
@@ -135,8 +135,8 @@ Preview the exact resource changes before creation:
 ```powershell
 az deployment group what-if `
   --resource-group $resourceGroup `
-  --template-file .\azuredeploy.json `
-  --parameters .\azuredeploy.parameters.json "adminPublicKey=$sshPublicKey"
+  --template-file .\azuredeploy.bicep `
+  --parameters .\azuredeploy.bicepparam "adminPublicKey=$sshPublicKey"
 ```
 
 `what-if` previews ARM resource changes; it does **not** calculate a price. It can also reveal whether the selected B1ls
@@ -151,8 +151,8 @@ Create the full deployment:
 az deployment group create `
   --resource-group $resourceGroup `
   --name $deploymentName `
-  --template-file .\azuredeploy.json `
-  --parameters .\azuredeploy.parameters.json "adminPublicKey=$sshPublicKey"
+  --template-file .\azuredeploy.bicep `
+  --parameters .\azuredeploy.bicepparam "adminPublicKey=$sshPublicKey"
 ```
 
 Check the deployment state and its outputs, including the public IP and SSH command:
@@ -187,7 +187,7 @@ az network nsg list --resource-group $resourceGroup --output table
 
 ## Cost planning and control
 
-ARM does not return a deployment price. Before deployment, use
+Bicep does not change Azure pricing. Before deployment, use
 the [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/) and add: a Linux `Standard_B1ls` VM in
 Mexico Central, one Premium SSD managed disk (32 GiB or the provisioned tier), one Standard public IPv4 address, and
 expected outbound bandwidth. Estimates vary by agreement, currency, taxes, region, and usage; do not treat a planning

@@ -1,0 +1,12 @@
+using './azuredeploy.bicep'
+
+param resourceGroupName = 'policy-example'
+param resourceGroupLocation = 'eastus'
+param initiativeName = 'get-secure'
+param initiativeDisplayName = 'Get Secure'
+param initiativeDescription = 'Audits Windows virtual machines that do not use Azure Disk Encryption or EncryptionAtHost.'
+param initiativeCategory = 'Compute'
+param assignmentName = 'get-secure-assignment'
+param assignmentDisplayName = 'Get Secure assignment'
+param assignmentDescription = 'Assigns the Get Secure initiative to the lab resource group.'
+param nonComplianceMessage = 'Windows virtual machines should enable Azure Disk Encryption or EncryptionAtHost.'

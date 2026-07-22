@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2976f58d-3542-448a-ad16-4f74b0830030" name="Changes" comment="COUR-1995: Revise Core Service Categories documentation to include Azure concepts and enhance clarity on key terms and definitions">
+    <list default="true" id="2976f58d-3542-448a-ad16-4f74b0830030" name="Changes" comment="COUR-1995: Revise Core Service Categories documentation to enhance clarity and detail, including a new section on selecting Azure services for specific use cases.">
+      <change afterPath="$PROJECT_DIR$/AZ-900 Prep/exploring/Introduction to high availability in Azure.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AZ-900 Prep/exploring/Core Service Categories.md" beforeDir="false" afterPath="$PROJECT_DIR$/AZ-900 Prep/exploring/Core Service Categories.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AZ-900 Prep/Index.md" beforeDir="false" afterPath="$PROJECT_DIR$/AZ-900 Prep/Index.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +63,7 @@
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.GoLinterPluginOnboarding": "true",
+    "RunOnceActivity.GoLinterPluginOnboardingV2": "true",
     "RunOnceActivity.GoLinterPluginStorageMigration": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
@@ -69,6 +71,7 @@
     "RunOnceActivity.go.formatter.settings.were.checked": "true",
     "RunOnceActivity.go.migrated.go.modules.settings": "true",
     "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "git-widget-placeholder": "COUR-1995-exploring-core-azure-services",
     "go.import.settings.migrated": "true",
     "go.sdk.automatically.set": "true",
@@ -88,8 +91,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-gosdk-f466f9b0953e-61a6b8fd16fd-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-252.28238.32" />
-        <option value="bundled-js-predefined-d6986cc7102b-a71380e98a7c-JavaScript-GO-252.28238.32" />
+        <option value="bundled-gosdk-72a9cf600ed8-448e06e64ec5-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-253.28294.337" />
+        <option value="bundled-js-predefined-d6986cc7102b-c7e53b3be11b-JavaScript-GO-253.28294.337" />
       </set>
     </attachedChunks>
   </component>
@@ -134,11 +137,9 @@
     <MESSAGE value="COUR-1995: Add Core Service Categories documentation" />
     <MESSAGE value="COUR-1995: Revise Core Service Categories documentation to enhance clarity and detail across compute, storage, database, networking, AI, IoT, management, and security services" />
     <MESSAGE value="COUR-1995: Revise Core Service Categories documentation to include Azure concepts and enhance clarity on key terms and definitions" />
-    <option name="LAST_COMMIT_MESSAGE" value="COUR-1995: Revise Core Service Categories documentation to include Azure concepts and enhance clarity on key terms and definitions" />
+    <MESSAGE value="COUR-1995: Revise Core Service Categories documentation to enhance clarity and detail, including a new section on selecting Azure services for specific use cases." />
+    <option name="LAST_COMMIT_MESSAGE" value="COUR-1995: Revise Core Service Categories documentation to enhance clarity and detail, including a new section on selecting Azure services for specific use cases." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
-  </component>
-  <component name="VgoProject">
-    <settings-migrated>true</settings-migrated>
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

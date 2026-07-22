@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2976f58d-3542-448a-ad16-4f74b0830030" name="Changes" comment="COUR-1995: Revise Core Service Categories documentation to enhance clarity and detail, including a new section on selecting Azure services for specific use cases.">
-      <change afterPath="$PROJECT_DIR$/AZ-900 Prep/exploring/Introduction to high availability in Azure.md" afterDir="false" />
+    <list default="true" id="2976f58d-3542-448a-ad16-4f74b0830030" name="Changes" comment="COUR-1995: Add glossary section to high availability in Azure documentation">
+      <change afterPath="$PROJECT_DIR$/AZ-900 Prep/exploring/Load Balancer.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AZ-900 Prep/Index.md" beforeDir="false" afterPath="$PROJECT_DIR$/AZ-900 Prep/Index.md" afterDir="false" />
     </list>
@@ -138,7 +138,9 @@
     <MESSAGE value="COUR-1995: Revise Core Service Categories documentation to enhance clarity and detail across compute, storage, database, networking, AI, IoT, management, and security services" />
     <MESSAGE value="COUR-1995: Revise Core Service Categories documentation to include Azure concepts and enhance clarity on key terms and definitions" />
     <MESSAGE value="COUR-1995: Revise Core Service Categories documentation to enhance clarity and detail, including a new section on selecting Azure services for specific use cases." />
-    <option name="LAST_COMMIT_MESSAGE" value="COUR-1995: Revise Core Service Categories documentation to enhance clarity and detail, including a new section on selecting Azure services for specific use cases." />
+    <MESSAGE value="COUR-1995: Add introduction to high availability in Azure documentation and update index" />
+    <MESSAGE value="COUR-1995: Add glossary section to high availability in Azure documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="COUR-1995: Add glossary section to high availability in Azure documentation" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="github-copilot-workspace">

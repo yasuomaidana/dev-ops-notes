@@ -8,6 +8,8 @@ This project creates the Azure resources for a Debian 12 virtual machine (VM) fr
 | --- | --- |
 | `azuredeploy.json` | ARM template: NSG, VNet/subnet, Standard public IP, NIC, managed OS disk, and VM. |
 | `azuredeploy.parameters.json` | Non-secret deployment choices: names, Mexico Central, zone 1, B1ls, and a 32 GiB OS disk. |
+| [`docs/arm-template-basics.md`](docs/arm-template-basics.md) | Beginner-friendly explanation of ARM template sections, parameters, variables, resources, outputs, API versions, and dependencies. |
+| [`examples/`](examples/README.md) | Separate, deployable starter, storage-account, and Windows VM/NIC template examples. |
 
 The VM configuration matches the requested baseline: `Standard_B1ls`, Debian 12, x64, Trusted Launch with Secure Boot and vTPM, an SSH public key, a zonal Standard public IP, and a `Premium_LRS` managed OS disk. SSH (TCP/22) is open to the Internet for lab access.
 

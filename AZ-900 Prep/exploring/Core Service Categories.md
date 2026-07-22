@@ -59,3 +59,20 @@ Services to protect your data, applications, and infrastructure.
 
 -   **Azure Key Vault:** A cloud service for securely storing and accessing secrets, such as API keys, passwords, or certificates.
 -   **Azure Active Directory (Azure AD):** Microsoft’s cloud-based identity and access management service.
+
+## Azure concepts
+
+-   **Tenant:** A dedicated instance of Azure Active Directory (Azure AD) that represents an organization. When you sign up for Azure, a tenant is created for you. It's a secure and isolated environment for your Azure resources and users.
+-   **Account:** An identity created in Azure AD or linked to it, which is used to access and manage Azure subscriptions and resources.
+-   **Subscription:** A logical container for your resources and a billing unit. You deploy all your Azure resources into subscriptions. An account can have multiple subscriptions with different billing and access management policies.
+-   **Region:** A geographic area on the planet containing at least one, but potentially multiple, datacenters that are networked together with a low-latency network. When you deploy a resource in Azure, you will often need to choose the region where you want your resource to be deployed.
+-   **Geography:** A discrete market, typically containing two or more regions, that preserves data residency and compliance boundaries. Geographies are fault-tolerant to withstand complete region failure through their connection to dedicated high-capacity networking infrastructure.
+-   **Resource:** A manageable item that is available through Azure. Examples include virtual machines, storage accounts, web apps, databases, and virtual networks.
+-   **Resource group:** A container that holds related resources for an Azure solution. It helps you manage all the resources for an application together. You can deploy, update, and delete all the resources for your solution in a single, coordinated operation.
+-   **Role:** Part of Role-Based Access Control (RBAC), a role is a collection of permissions, like read, write, and delete, that can be assigned to users, groups, and service principals to grant them access to Azure resources.
+-   **Storage:** A general term for the Azure services that provide scalable and secure data storage in the cloud, including services for objects (Blob), files (Azure Files), disks, and more.
+-   **Image:** A template used to create a virtual machine. An image contains the operating system and any pre-installed software. You can use images from the Azure Marketplace or create your own custom images.
+-   **Offer:** The specific pricing, credits, and terms related to your Azure subscription. Different offers are available, such as Pay-As-You-Go, Free Trial, and Enterprise Agreement.
+-   **Portal:** The Azure portal is a web-based, unified console that allows you to build, manage, and monitor everything from simple web apps to complex cloud deployments using a graphical user interface.
+-   **Service Level Agreement (SLA):** Microsoft's commitment for uptime and connectivity of a particular service. If a service fails to meet the guaranteed SLA, you may be eligible for a credit on your monthly service bill.
+-   **Identity access:** The process of managing and securing identities to control who has access to what resources. In Azure, this is primarily managed through Azure Active Directory (Azure AD), which provides services like authentication, authorization, single sign-on (SSO), and multi-factor authentication (MFA).

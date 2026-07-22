@@ -60,3 +60,25 @@ When designing for high availability in Azure, consider the following:
 *   **Monitor and Alert**: Continuously monitor the health of your application and infrastructure, and set up alerts for potential issues.
 *   **Backup and Restore**: Implement a robust backup and restore strategy to recover data in case of corruption or loss.
 *   **Test Regularly**: Periodically test your high availability and disaster recovery plans to ensure they work as expected.
+
+## Glossary
+
+| Abbreviation | Full Form                          |
+|:-------------|:-----------------------------------|
+| OSI          | Open Systems Interconnection       |
+| VM           | Virtual Machine                    |
+| TCP          | Transmission Control Protocol      |
+| UDP          | User Datagram Protocol             |
+| HTTP         | Hypertext Transfer Protocol        |
+| HTTPS        | Hypertext Transfer Protocol Secure |
+| NAT          | Network Address Translation        |
+| SHA256       | Secure Hash Algorithm 256          |
+| TLS          | Transport Layer Security           |
+| HA           | High Availability                  |
+| NSG          | Network Security Group             |
+| SKU          | Stock Keeping Unit                 |
+| IPv4         | Internet Protocol version 4        |
+| IPv6         | Internet Protocol version 6        |
+| CLI          | Command-Line Interface             |
+| API          | Application Programming Interface  |
+| IP           | Internet Protocol                  |

@@ -59,6 +59,7 @@ Use this table during the lab.
 | Subscription deployments | `az deployment sub list --location $location --output table` | List subscription-scope deployments recorded in one location. |
 | Resource groups | `az group show --name $resourceGroup --output table` | Confirm that the lab resource group exists. |
 | Initiative definitions | `az policy set-definition show --name get-secure --output jsonc` | Show the custom initiative definition. |
+| Initiative definitions | `az policy definition list --query "[?contains(displayName, 'enable Azure Disk Encryption')]"` | Find built-in policy definitions related to Azure Disk Encryption by display name. |
 | Policy assignments | `az policy assignment show --name get-secure-assignment --scope $scope --output jsonc` | Show the assignment at the lab scope. |
 | Policy state | `az policy state list --resource-group $resourceGroup --output table` | List compliance results for resources in the lab resource group. |
 | Cleanup | `az policy assignment delete --name get-secure-assignment --scope $scope` | Delete the assignment first. |

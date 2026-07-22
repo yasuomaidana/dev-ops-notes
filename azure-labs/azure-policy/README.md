@@ -29,6 +29,7 @@ Sources used to verify this:
 | `azuredeploy.bicep` | Subscription-scope deployment that creates the lab resource group, the `Get Secure` initiative, and the assignment. |
 | `azuredeploy.bicepparam` | Default lab values. |
 | [`docs/policy-basics.md`](docs/policy-basics.md) | Short explanation of how this lab works and why the test VM becomes non-compliant instead of being denied. |
+| [`docs/azure-rbac-overview.md`](docs/azure-rbac-overview.md) | Summary of Azure RBAC, its core components, and how it differs from Azure Policy and legacy Azure Blueprints guidance. |
 
 ## Azure CLI quick reference
 
@@ -47,6 +48,7 @@ Use `$location`, `$deploymentName`, and `$resourceGroup` from the workflow below
 | Subscription deployments | `az deployment sub list --location $location --output table` | List subscription-scope deployments recorded in one location. |
 | Resource groups | `az group show --name $resourceGroup --output table` | Confirm that the lab resource group exists. |
 | Initiative definitions | `az policy set-definition show --name get-secure --output jsonc` | Show the custom initiative definition. |
+| Initiative definitions | `az policy definition list --query "[?contains(displayName, 'enable Azure Disk Encryption')]"` | Find built-in policy definitions related to Azure Disk Encryption by display name. |
 | Policy assignments | `az policy assignment show --name get-secure-assignment --scope $scope --output jsonc` | Show the assignment at the lab scope. |
 | Policy state | `az policy state list --resource-group $resourceGroup --output table` | List compliance results for resources in the lab resource group. |
 | Cleanup | `az policy assignment delete --name get-secure-assignment --scope $scope` | Delete the assignment first. |

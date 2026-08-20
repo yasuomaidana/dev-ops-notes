@@ -24,7 +24,7 @@ The configuration keeps the same intended defaults as the Bicep lab:
 | `variables.tf` | Input variables for names, region, SSH key, VM size, and disk settings. |
 | `main.tf` | Azure resources for the resource group, network, public IP, NIC, NSG, and Linux VM. |
 | `outputs.tf` | Useful outputs including the public IP and SSH command. |
-| `terraform.tfvars.example` | Example non-secret values; copy to `terraform.tfvars` and replace placeholders. |
+| `terraform.tfvars.example` | Example values; copy to `terraform.tfvars`, keep non-sensitive values there, and prefer env vars for sensitive inputs. |
 
 ## Prerequisites
 
@@ -57,14 +57,22 @@ Create your working variable file:
 Copy-Item .\terraform.tfvars.example .\terraform.tfvars
 ```
 
-Read the public key and place it into `terraform.tfvars`:
+Read the public key:
 
 ```powershell
 $sshPublicKey = (Get-Content "$env:USERPROFILE\.ssh\vm1_key.pub" -Raw).Trim()
 $sshPublicKey
 ```
 
-Paste the displayed value into `admin_public_key` in `terraform.tfvars`.
+Standard OpenTofu/Terraform practice is to pass sensitive inputs through environment variables named
+`TF_VAR_<variable_name>`. In this lab, that variable is `TF_VAR_admin_public_key`:
+
+```powershell
+$env:TF_VAR_admin_public_key = (Get-Content "$env:USERPROFILE\.ssh\vm1_key.pub" -Raw).Trim()
+```
+
+If you prefer, you can still paste the displayed public key into `admin_public_key` in `terraform.tfvars`. Do not put a
+private key in `terraform.tfvars`.
 
 ## Initialize and review the plan
 

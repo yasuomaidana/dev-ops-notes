@@ -2,17 +2,17 @@
 
 This project creates the Azure resources for a Debian 12 virtual machine (VM) from Bicep source files. Azure Resource
 Manager still receives JSON at deployment time, but Bicep is the modern authoring format and compiles to that JSON for
-you. The workflow is designed for GoLand + Azure CLI: GoLand edits `.bicep` files and the integrated terminal runs
-Azure commands. The Azure Toolkit is not required.
+you. The workflow is designed for GoLand + Azure CLI: GoLand edits `.bicep` files and the integrated terminal runs Azure
+commands. The Azure Toolkit is not required.
 
 ## Files
 
-| File                                                         | Purpose                                                                                                                            |
-|--------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
-| `azuredeploy.bicep`                                          | Primary Bicep source: NSG, VNet/subnet, Standard public IP, NIC, managed OS disk, and VM.                                          |
-| `azuredeploy.bicepparam`                                     | Non-secret deployment choices: names, Mexico Central, zone 1, B1ls, and a 32 GiB OS disk.                                          |
-| [`docs/arm-template-basics.md`](docs/arm-template-basics.md) | Beginner-friendly explanation of Bicep structure, parameters, variables, resources, outputs, API versions, and dependencies.       |
-| [`examples/`](examples/README.md)                            | Smaller reference examples; some are still JSON so you can compare Bicep authoring with raw ARM output.                             |
+| File                                                         | Purpose                                                                                                                      |
+|--------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|
+| `azuredeploy.bicep`                                          | Primary Bicep source: NSG, VNet/subnet, Standard public IP, NIC, managed OS disk, and VM.                                    |
+| `azuredeploy.bicepparam`                                     | Non-secret deployment choices: names, Mexico Central, zone 1, B1ls, and a 32 GiB OS disk.                                    |
+| [`docs/arm-template-basics.md`](docs/arm-template-basics.md) | Beginner-friendly explanation of Bicep structure, parameters, variables, resources, outputs, API versions, and dependencies. |
+| [`examples/`](examples/README.md)                            | Smaller reference examples; some are still JSON so you can compare Bicep authoring with raw ARM output.                      |
 
 ## Azure CLI quick reference
 

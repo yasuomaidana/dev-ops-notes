@@ -6,10 +6,11 @@ This file organizes the content inside `azure-labs` in a simple learning order.
 
 1. Start with [ARM Creation](./arm-creation/README.md)
 2. Review [ARM Basics](./arm-creation/docs/arm-template-basics.md)
-3. Practice with [ARM Examples](./arm-creation/examples/README.md)
-4. Continue with [Azure Policy](./azure-policy/README.md)
-5. Review [Policy Basics](./azure-policy/docs/policy-basics.md)
-6. Finish with [Azure RBAC Overview](./azure-policy/docs/azure-rbac-overview.md)
+3. Compare with [OpenTofu VM Creation](./arm-creation/opentofu/README.md)
+4. Practice with [ARM Examples](./arm-creation/examples/README.md)
+5. Continue with [Azure Policy](./azure-policy/README.md)
+6. Review [Policy Basics](./azure-policy/docs/policy-basics.md)
+7. Finish with [Azure RBAC Overview](./azure-policy/docs/azure-rbac-overview.md)
 
 ## Folder overview
 
@@ -29,6 +30,7 @@ Main files:
 | [azuredeploy.parameters.json](./arm-creation/azuredeploy.parameters.json) | ARM JSON parameters file. |
 | [docs/arm-template-basics.md](./arm-creation/docs/arm-template-basics.md) | Beginner explanation of how Bicep templates are structured. |
 | [examples/README.md](./arm-creation/examples/README.md) | Smaller practice examples for learning by comparison. |
+| [opentofu/README.md](./arm-creation/opentofu/README.md) | OpenTofu version of the VM lab with Terraform-style Azure resources. |
 
 ### `azure-policy`
 
@@ -55,7 +57,8 @@ Read these first:
 
 1. [ARM Creation README](./arm-creation/README.md)
 2. [ARM Template Basics](./arm-creation/docs/arm-template-basics.md)
-3. [Examples README](./arm-creation/examples/README.md)
+3. [OpenTofu VM Creation](./arm-creation/opentofu/README.md)
+4. [Examples README](./arm-creation/examples/README.md)
 
 ### If you want deployment practice
 
@@ -63,8 +66,10 @@ Focus on these files:
 
 1. [arm-creation/azuredeploy.bicep](./arm-creation/azuredeploy.bicep)
 2. [arm-creation/azuredeploy.bicepparam](./arm-creation/azuredeploy.bicepparam)
-3. [azure-policy/azuredeploy.bicep](./azure-policy/azuredeploy.bicep)
-4. [azure-policy/modules/policy-assignment.bicep](./azure-policy/modules/policy-assignment.bicep)
+3. [arm-creation/opentofu/main.tf](./arm-creation/opentofu/main.tf)
+4. [arm-creation/opentofu/variables.tf](./arm-creation/opentofu/variables.tf)
+5. [azure-policy/azuredeploy.bicep](./azure-policy/azuredeploy.bicep)
+6. [azure-policy/modules/policy-assignment.bicep](./azure-policy/modules/policy-assignment.bicep)
 
 ### If you want governance and compliance
 
@@ -78,6 +83,8 @@ Read these after the VM lab:
 
 - Infrastructure creation:
   [arm-creation](./arm-creation/README.md)
+- OpenTofu alternative:
+  [arm-creation/opentofu](./arm-creation/opentofu/README.md)
 - Governance and compliance:
   [azure-policy](./azure-policy/README.md)
 - Beginner explanations:

@@ -13,6 +13,7 @@ commands. The Azure Toolkit is not required.
 | `azuredeploy.bicepparam`                                     | Non-secret deployment choices: names, Mexico Central, zone 1, B1ls, and a 32 GiB OS disk.                                    |
 | [`docs/arm-template-basics.md`](docs/arm-template-basics.md) | Beginner-friendly explanation of Bicep structure, parameters, variables, resources, outputs, API versions, and dependencies. |
 | [`examples/`](examples/README.md)                            | Smaller reference examples; some are still JSON so you can compare Bicep authoring with raw ARM output.                      |
+| [`opentofu/README.md`](opentofu/README.md)                   | Equivalent Azure VM lab authored in OpenTofu instead of Bicep.                                                                |
 
 ## Azure CLI quick reference
 

@@ -1,0 +1,14 @@
+resource_group_name         = "example"
+location                    = "Mexico Central"
+vm_name                     = "vm1"
+availability_zone           = "1"
+vm_size                     = "Standard_B1ls"
+admin_username              = "azureuser"
+# Loaded using env variables
+# admin_public_key            = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQ..."
+virtual_network_name        = "vnet-mexicocentral-1"
+subnet_name                 = "snet-mexicocentral-1"
+public_ip_name              = "vm1-ip"
+network_interface_name      = "vm1-nic"
+network_security_group_name = "vm1-nsg"
+os_disk_size_gb             = 32

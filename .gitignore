@@ -1,1 +1,5 @@
 /azure-labs/.ssh/
+/azure-labs/arm-creation/opentofu/.terraform/*
+/azure-labs/arm-creation/opentofu/terraform.tfstate
+/azure-labs/arm-creation/opentofu/terraform.tfstate.backup
+/azure-labs/arm-creation/opentofu/vm1.tfplan

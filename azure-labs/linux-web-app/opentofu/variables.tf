@@ -76,10 +76,10 @@ variable "number_of_workers" {
   default     = 1
 }
 
-variable "linux_fx_version" {
+variable "node_version" {
   description = "Runtime stack for the Linux Web App, for example NODE|20-lts or DOCKER|<image>."
   type        = string
-  default     = "NODE|20-lts"
+  default     = "20-lts"
 }
 
 variable "tags" {

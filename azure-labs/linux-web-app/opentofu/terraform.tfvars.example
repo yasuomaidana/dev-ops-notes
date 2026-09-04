@@ -11,7 +11,7 @@ sku_code                               = "B1"
 worker_size                            = 0
 worker_size_id                         = 0
 number_of_workers                      = 1
-linux_fx_version                       = "NODE|20-lts"
+node_version                       = "20-lts"
 
 tags = {
   environment = "lab"

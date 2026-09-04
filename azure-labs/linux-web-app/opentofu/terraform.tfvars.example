@@ -1,0 +1,19 @@
+resource_group_name                    = "example-webapp-rg"
+deployment_name                        = "linux-web-app"
+name                                   = "example-linux-webapp"
+location                               = "mexicocentral"
+hosting_plan_name                      = "example-linux-plan"
+always_on                              = false
+ftps_state                             = "Disabled"
+auto_generated_domain_name_label_scope = "TenantReuse"
+sku                                    = "Basic"
+sku_code                               = "B1"
+worker_size                            = 0
+worker_size_id                         = 0
+number_of_workers                      = 1
+linux_fx_version                       = "NODE|20-lts"
+
+tags = {
+  environment = "lab"
+  managed_by  = "opentofu"
+}

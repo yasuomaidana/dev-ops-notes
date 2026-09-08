@@ -1,18 +1,5 @@
 # Linux Web App lab
 
-This folder is a separate Azure lab for a Linux Web App and App Service Plan. It does not reuse the VM lab files in
-`../arm-creation`.
-
-## Files
-
-| File                          | Purpose                                                                                   |
-|-------------------------------|-------------------------------------------------------------------------------------------|
-| `azuredeploy.json`            | ARM template for the App Service plan, Linux Web App, and publishing credential policies. |
-| `azuredeploy.bicep`           | Bicep source equivalent of the ARM template.                                              |
-| `azuredeploy.parameters.json` | ARM parameter values for a sample deployment.                                             |
-| `azuredeploy.bicepparam`      | Bicep parameter values for a sample deployment.                                           |
-| `opentofu`                    | Separate OpenTofu project that deploys this ARM template.                                 |
-
 ## Deploy with Bicep
 
 ```powershell
@@ -28,6 +15,9 @@ az deployment group create `
   --template-file .\azuredeploy.bicep `
   --parameters .\azuredeploy.bicepparam
 ```
+
+The web app name is generated from `namePrefix` plus a deterministic suffix based on the subscription and resource
+group. Deploying the same template to another resource group therefore produces a different, collision-resistant name.
 
 ## Deploy with ARM JSON
 

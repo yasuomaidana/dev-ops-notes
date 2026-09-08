@@ -1,17 +1,16 @@
 resource_group_name                    = "example-webapp-rg"
 deployment_name                        = "linux-web-app"
-name                                   = "example-linux-webapp"
+# OpenTofu appends an eight-character random suffix to make the Azure name unique.
+# The default hostname becomes <web_app_name_prefix>-<random_suffix>.azurewebsites.net.
+# A custom domain is configured separately with DNS and an App Service hostname binding.
+web_app_name_prefix                    = "example-linux-webapp"
 location                               = "mexicocentral"
 hosting_plan_name                      = "example-linux-plan"
 always_on                              = false
 ftps_state                             = "Disabled"
-auto_generated_domain_name_label_scope = "TenantReuse"
-sku                                    = "Basic"
 sku_code                               = "B1"
-worker_size                            = 0
-worker_size_id                         = 0
 number_of_workers                      = 1
-node_version                       = "20-lts"
+node_version                           = "20-lts"
 
 tags = {
   environment = "lab"

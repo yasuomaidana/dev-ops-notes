@@ -10,10 +10,15 @@ variable "deployment_name" {
   default     = "linux-web-app"
 }
 
-variable "name" {
-  description = "Name of the Azure Linux Web App."
+variable "web_app_name_prefix" {
+  description = "Prefix for the Azure Linux Web App name; an eight-character random suffix is appended."
   type        = string
   default     = "example-linux-webapp"
+
+  validation {
+    condition     = length(var.web_app_name_prefix) >= 2 && length(var.web_app_name_prefix) <= 46 && can(regex("^[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?$", var.web_app_name_prefix))
+    error_message = "web_app_name_prefix must be 2-46 characters, contain only letters, numbers, or hyphens, and cannot start or end with a hyphen."
+  }
 }
 
 variable "location" {
@@ -40,34 +45,10 @@ variable "ftps_state" {
   default     = "Disabled"
 }
 
-variable "auto_generated_domain_name_label_scope" {
-  description = "Scope used for Azure-generated default hostname labels."
-  type        = string
-  default     = "TenantReuse"
-}
-
-variable "sku" {
-  description = "App Service plan pricing tier."
-  type        = string
-  default     = "Basic"
-}
-
 variable "sku_code" {
   description = "App Service plan SKU code."
   type        = string
   default     = "B1"
-}
-
-variable "worker_size" {
-  description = "Worker size value for the App Service plan."
-  type        = number
-  default     = 0
-}
-
-variable "worker_size_id" {
-  description = "Worker size ID for the App Service plan."
-  type        = number
-  default     = 0
 }
 
 variable "number_of_workers" {

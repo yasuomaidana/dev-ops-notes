@@ -1,0 +1,19 @@
+resource_group_name = "example-webapp-scaling-rg"
+web_app_name_prefix = "example-linux-webapp-scaling"
+location            = "mexicocentral"
+hosting_plan_name   = "example-linux-scaling-plan"
+always_on           = false
+ftps_state          = "Disabled"
+
+# Vertical scaling: choose a larger App Service SKU, such as P1v3.
+sku_code = "B1"
+
+# Horizontal scaling: increase the number of workers.
+number_of_workers = 1
+node_version      = "20-lts"
+
+tags = {
+  environment = "lab"
+  managed_by  = "opentofu"
+}
+

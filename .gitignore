@@ -4,4 +4,6 @@
 **/.terraform.lock.hcl
 **/terraform.tfstate
 **/terraform.tfstate.*
-.idea
+.idea/
+**/**/*.terraform.lock.hcl
+graphify-out/

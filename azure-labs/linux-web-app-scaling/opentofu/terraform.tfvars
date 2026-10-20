@@ -1,5 +1,5 @@
 resource_group_name = "rg-testing-web-apps"
-web_app_name_prefix = "example-linux-webapp-scaling"
+web_app_name_prefix = "example-linux-webapp"
 location            = "mexicocentral"
 hosting_plan_name   = "example-linux-plan"
 always_on           = false
@@ -9,11 +9,10 @@ ftps_state          = "Disabled"
 sku_code = "B1"
 
 # Horizontal scaling: increase the number of workers.
-number_of_workers = 1
+number_of_workers = 2
 node_version      = "22-lts"
 
 tags = {
   environment = "lab"
   managed_by  = "opentofu"
 }
-

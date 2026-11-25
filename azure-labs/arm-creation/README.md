@@ -5,12 +5,14 @@ Manager still receives JSON at deployment time, but Bicep is the modern authorin
 you. The workflow is designed for GoLand + Azure CLI: GoLand edits `.bicep` files and the integrated terminal runs Azure
 commands. The Azure Toolkit is not required.
 
+For shared sign-in and subscription setup, follow [Azure CLI setup](../getting-started.md).
+
 ## Files
 
 | File                                                         | Purpose                                                                                                                      |
 |--------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|
-| `azuredeploy.bicep`                                          | Primary Bicep source: NSG, VNet/subnet, Standard public IP, NIC, managed OS disk, and VM.                                    |
-| `azuredeploy.bicepparam`                                     | Non-secret deployment choices: names, Mexico Central, zone 1, B1ls, and a 32 GiB OS disk.                                    |
+| [`azuredeploy.bicep`](./azuredeploy.bicep)                   | Primary Bicep source: NSG, VNet/subnet, Standard public IP, NIC, managed OS disk, and VM. |
+| [`azuredeploy.bicepparam`](./azuredeploy.bicepparam)          | Non-secret deployment choices: names, Mexico Central, zone 1, B1ls, and a 32 GiB OS disk. |
 | [`docs/arm-template-basics.md`](docs/arm-template-basics.md) | Beginner-friendly explanation of Bicep structure, parameters, variables, resources, outputs, API versions, and dependencies. |
 | [`examples/`](examples/README.md)                            | Smaller reference examples; some are still JSON so you can compare Bicep authoring with raw ARM output.                      |
 | [`opentofu/README.md`](opentofu/README.md)                   | Equivalent Azure VM lab authored in OpenTofu instead of Bicep.                                                                |
@@ -22,10 +24,6 @@ require the template, parameter, and SSH-key arguments shown in their respective
 
 | Topic                    | Command                                                                                                    | Purpose                                                  |
 |--------------------------|------------------------------------------------------------------------------------------------------------|----------------------------------------------------------|
-| Authentication and tools | `az login`                                                                                                 | Sign in to Azure.                                        |
-| Authentication and tools | `az account show --output table`                                                                           | Show the active subscription.                            |
-| Authentication and tools | `az account set --subscription "<subscription>"`                                                           | Select a subscription.                                   |
-| Authentication and tools | `az bicep install`                                                                                         | Install the Bicep CLI.                                   |
 | Image availability       | `az vm image list --location <location> --publisher Debian --offer debian-12 --all --output table`         | List Debian 12 marketplace images available in a region. |
 | Resource groups          | `az group create --name $resourceGroup --location $location`                                               | Create a resource group.                                 |
 | Resource groups          | `az group exists --name $resourceGroup`                                                                    | Check whether a resource group still exists.             |
@@ -61,24 +59,12 @@ the Internet for lab access.
 > Security: this is intentionally a lab template. Before using it beyond personal testing, restrict the NSG rule's
 > `sourceAddressPrefix` from `*` to your public IP or trusted network range.
 
-## Prepare GoLand and Azure CLI
+## Prepare GoLand
 
 Install the **Bicep** plugin in GoLand at **Settings → Plugins → Marketplace → Bicep**. It provides syntax support,
 completion, and validation for `.bicep` files.
 
-In GoLand's integrated PowerShell terminal, authenticate and install the Bicep CLI:
-
-```powershell
-az login
-az bicep install
-az account show --output table
-```
-
-If the active subscription is not the intended one, select it explicitly:
-
-```powershell
-az account set --subscription "Visual Studio Professional Subscription"
-```
+In GoLand's integrated PowerShell terminal, complete the shared [Azure CLI setup](../getting-started.md) and confirm the intended subscription is selected.
 
 ## Prepare the SSH key
 

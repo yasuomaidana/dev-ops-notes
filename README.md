@@ -1,2 +1,5 @@
-# dev-ops-notes
-Here, I'll put some notes related to dev ops, they are focused on my needings, but you can read them if you want
+# DevOps Notes
+
+Browse the learning paths on the [DevOps Notes site](https://yasuomaidana.github.io/dev-ops-notes/).
+
+To edit pages, preview them locally, or publish an update, follow [Update and preview the site](https://yasuomaidana.github.io/dev-ops-notes/contributing/).

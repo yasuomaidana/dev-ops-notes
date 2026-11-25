@@ -3,15 +3,17 @@
 This OpenTofu project is isolated from the VM lab. It creates a resource group and deploys the sibling
 `../azuredeploy.json` ARM template through `azurerm_resource_group_template_deployment`.
 
+Complete the shared [Azure CLI setup](../../getting-started.md) before running OpenTofu. Source files: [configuration](./main.tf) and [example variables](./terraform.tfvars.example).
+
 ## Files
 
 | File                       | Purpose                                                |
 |----------------------------|--------------------------------------------------------|
-| `providers.tf`             | OpenTofu and AzureRM provider requirements.            |
-| `variables.tf`             | Input values passed into the ARM template deployment.  |
-| `main.tf`                  | Resource group plus the ARM deployment resource.       |
-| `outputs.tf`               | Useful outputs including the default hostname and URL. |
-| `terraform.tfvars.example` | Example values for the deployment.                     |
+| [`providers.tf`](./providers.tf) | OpenTofu and AzureRM provider requirements. |
+| [`variables.tf`](./variables.tf) | Input values passed into the ARM template deployment. |
+| [`main.tf`](./main.tf) | Resource group plus the ARM deployment resource. |
+| [`outputs.tf`](./outputs.tf) | Useful outputs including the default hostname and URL. |
+| [`terraform.tfvars.example`](./terraform.tfvars.example) | Example values for the deployment. |
 
 ## Usage
 

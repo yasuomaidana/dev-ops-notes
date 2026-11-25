@@ -4,6 +4,8 @@ This lab now matches the DCA Tech scenario: create a resource group, create a cu
 add the Microsoft built-in policy **Windows virtual machines should enable Azure Disk Encryption or EncryptionAtHost.**,
 and assign that initiative to the resource group.
 
+Before starting, follow the shared [Azure CLI setup](../getting-started.md). For instructions on editing and previewing this learning site, see [Update and preview the site](../../CONTRIBUTING.md).
+
 ## Important behavior correction
 
 As of **July 22, 2026**, Microsoft lists the built-in policy **Windows virtual machines should enable Azure Disk
@@ -26,8 +28,9 @@ Sources used to verify this:
 
 | File | Purpose |
 | --- | --- |
-| `azuredeploy.bicep` | Subscription-scope deployment that creates the lab resource group, the `Get Secure` initiative, and the assignment. |
-| `azuredeploy.bicepparam` | Default lab values. |
+| [`azuredeploy.bicep`](./azuredeploy.bicep) | Subscription-scope deployment that creates the lab resource group, the `Get Secure` initiative, and the assignment. |
+| [`azuredeploy.bicepparam`](./azuredeploy.bicepparam) | Default lab values. |
+| [`modules/policy-assignment.bicep`](./modules/policy-assignment.bicep) | Reusable policy-assignment module. |
 | [`docs/policy-basics.md`](docs/policy-basics.md) | Short explanation of how this lab works and why the test VM becomes non-compliant instead of being denied. |
 | [`docs/azure-rbac-overview.md`](docs/azure-rbac-overview.md) | Summary of Azure RBAC, its core components, and how it differs from Azure Policy and legacy Azure Blueprints guidance. |
 
@@ -37,10 +40,6 @@ Use `$location`, `$deploymentName`, and `$resourceGroup` from the workflow below
 
 | Topic | Command | Purpose |
 | --- | --- | --- |
-| Authentication and tools | `az login` | Sign in to Azure. |
-| Authentication and tools | `az account show --output table` | Show the active subscription. |
-| Authentication and tools | `az account set --subscription "<subscription>"` | Select a subscription. |
-| Authentication and tools | `az bicep install` | Install the Bicep CLI. |
 | Subscription deployments | `az deployment sub validate ...` | Validate the subscription deployment before creating policy resources. |
 | Subscription deployments | `az deployment sub what-if ...` | Preview initiative, assignment, and resource-group changes. |
 | Subscription deployments | `az deployment sub create ...` | Create or update the lab deployment from Bicep. |
@@ -71,17 +70,7 @@ The initiative contains one Microsoft built-in policy definition:
 
 ## Prerequisites
 
-```powershell
-az login
-az bicep install
-az account show --output table
-```
-
-If needed:
-
-```powershell
-az account set --subscription "<your-subscription>"
-```
+Complete the shared [Azure CLI setup](../getting-started.md) and confirm the intended subscription is active before deploying.
 
 ## Deploy the lab
 

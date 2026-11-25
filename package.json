@@ -1,0 +1,17 @@
+{
+  "name": "dev-ops-notes",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "bun@1.4.5",
+  "scripts": {
+    "dev": "bun scripts/dev.mjs",
+    "sync-docs": "bun scripts/sync-docs.mjs",
+    "build": "bun scripts/sync-docs.mjs && astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "^0.43.1",
+    "astro": "^7.4.13"
+  }
+}

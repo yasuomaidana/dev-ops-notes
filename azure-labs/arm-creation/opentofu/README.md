@@ -20,27 +20,18 @@ The configuration keeps the same intended defaults as the Bicep lab:
 
 | File | Purpose |
 | --- | --- |
-| `providers.tf` | OpenTofu and AzureRM provider requirements. |
-| `variables.tf` | Input variables for names, region, SSH key, VM size, and disk settings. |
-| `main.tf` | Azure resources for the resource group, network, public IP, NIC, NSG, and Linux VM. |
-| `outputs.tf` | Useful outputs including the public IP and SSH command. |
-| `terraform.tfvars.example` | Example values; copy to `terraform.tfvars`, keep non-sensitive values there, and prefer env vars for sensitive inputs. |
+| [`providers.tf`](./providers.tf) | OpenTofu and AzureRM provider requirements. |
+| [`variables.tf`](./variables.tf) | Input variables for names, region, SSH key, VM size, and disk settings. |
+| [`main.tf`](./main.tf) | Azure resources for the resource group, network, public IP, NIC, NSG, and Linux VM. |
+| [`outputs.tf`](./outputs.tf) | Useful outputs including the public IP and SSH command. |
+| [`terraform.tfvars.example`](./terraform.tfvars.example) | Example values; copy to `terraform.tfvars`, keep non-sensitive values there, and prefer env vars for sensitive inputs. |
 
 ## Prerequisites
 
-Install and verify:
+Complete the shared [Azure CLI setup](../../getting-started.md) and verify OpenTofu is available:
 
 ```powershell
 tofu version
-az version
-az login
-az account show --output table
-```
-
-If the active subscription is not the intended one, select it explicitly:
-
-```powershell
-az account set --subscription "Visual Studio Professional Subscription"
 ```
 
 ## Prepare your variables

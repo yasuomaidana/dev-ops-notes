@@ -1,4 +1,4 @@
-# Content
+# AZ-900 Prep
 
 1. Introduction to cloud computing
     1. [Quick AI models overview](introduction/Quick-AI-models-overview.md)

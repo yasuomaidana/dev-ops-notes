@@ -1,5 +1,7 @@
 # Linux Web App lab
 
+Source files: [Bicep template](./azuredeploy.bicep), [Bicep parameters](./azuredeploy.bicepparam), and [ARM JSON template](./azuredeploy.json).
+
 ## Deploy with Bicep
 
 ```powershell

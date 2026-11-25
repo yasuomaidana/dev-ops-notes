@@ -20,7 +20,7 @@ Instead of clicking around in the Azure portal, you describe the infrastructure 
 - a network interface
 - a Linux virtual machine
 
-That description lives in files like [main.tf](C:/Users/yasuo.maidana/GolandProjects/dev-ops-notes/azure-labs/arm-creation/opentofu/main.tf), [variables.tf](C:/Users/yasuo.maidana/GolandProjects/dev-ops-notes/azure-labs/arm-creation/opentofu/variables.tf), and [outputs.tf](C:/Users/yasuo.maidana/GolandProjects/dev-ops-notes/azure-labs/arm-creation/opentofu/outputs.tf).
+That description lives in files like [main.tf](./main.tf), [variables.tf](./variables.tf), and [outputs.tf](./outputs.tf).
 
 ## How the workflow works
 
@@ -32,7 +32,7 @@ The normal flow is:
 
 ### `tofu init`
 
-This downloads the provider plugins declared in [providers.tf](C:/Users/yasuo.maidana/GolandProjects/dev-ops-notes/azure-labs/arm-creation/opentofu/providers.tf).  
+This downloads the provider plugins declared in [providers.tf](./providers.tf).
 In this lab, the main provider is `azurerm`, which is the Azure provider.
 
 ### `tofu plan`
@@ -56,7 +56,7 @@ The state file is important because it records things like:
 
 ## What `resource "azurerm_subnet" "vm_lab"` means
 
-This block in [main.tf](C:/Users/yasuo.maidana/GolandProjects/dev-ops-notes/azure-labs/arm-creation/opentofu/main.tf:34) defines a subnet:
+This block in [main.tf](./main.tf#L34) defines a subnet:
 
 ```hcl
 resource "azurerm_subnet" "vm_lab" {
@@ -99,13 +99,13 @@ You do **not** hardcode that string here. OpenTofu gets it from Azure after crea
 
 This lab uses `azurerm_subnet.vm_lab.id` in two places:
 
-In [main.tf](C:/Users/yasuo.maidana/GolandProjects/dev-ops-notes/azure-labs/arm-creation/opentofu/main.tf:42), the subnet is associated with the network security group:
+In [main.tf](./main.tf#L42), the subnet is associated with the network security group:
 
 ```hcl
 subnet_id = azurerm_subnet.vm_lab.id
 ```
 
-In [main.tf](C:/Users/yasuo.maidana/GolandProjects/dev-ops-notes/azure-labs/arm-creation/opentofu/main.tf:64), the network interface is attached to that subnet:
+In [main.tf](./main.tf#L64), the network interface is attached to that subnet:
 
 ```hcl
 subnet_id = azurerm_subnet.vm_lab.id

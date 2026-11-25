@@ -1,5 +1,7 @@
 # Build and run a container image with Azure Container Registry Tasks
 
+The [example Dockerfile](./Dockerfile) is in this folder. Run the commands below from `kubernetes-notes/Azure`.
+
 1. Create a resource group for the resources needed for this exercise
     ```shell
     az group create --location eastus --name myResourceGroup

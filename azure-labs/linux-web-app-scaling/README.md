@@ -9,6 +9,8 @@ The two phases are deliberately separate. Azure does not create OpenTofu state, 
 deployment history as state. Do not switch tools for the same resources unless you intentionally import those resources
 into the new tool's state.
 
+Source files: [Bicep template](./azuredeploy.bicep), [baseline parameters](./azuredeploy.bicepparam), [scale-up parameters](./azuredeploy.scale.bicepparam), and [OpenTofu configuration](./opentofu/main.tf).
+
 ## What this lab changes
 
 - Vertical scaling changes the App Service plan SKU. This lab keeps the `B1` SKU so the exercise stays inexpensive.
@@ -26,20 +28,10 @@ field and test the application before changing the production runtime.
 
 ## Prerequisites
 
-Run these commands from this directory:
+Complete the shared [Azure CLI setup](../getting-started.md) first. Keep the same PowerShell session open so `$subscriptionId` is available for OpenTofu.
 
 ```powershell
-az login
-az account list --all --query "[].{Name:name, Id:id, Tenant:tenantId, State:state, Default:isDefault}" -o table
-
-# Use the subscription that should contain this lab.
-$subscriptionId = "<subscription-id>"
-az account set --subscription $subscriptionId
 $env:ARM_SUBSCRIPTION_ID = $subscriptionId
-
-az account show --query "{Name:name, Id:id, Tenant:tenantId, State:state}" -o table
-az bicep version
-tofu version
 ```
 
 The AzureRM provider 4.x needs a subscription ID. Setting `ARM_SUBSCRIPTION_ID` in the current PowerShell session is
@@ -168,65 +160,89 @@ the Bicep phase. The Bicep deployment records are not OpenTofu state and do not 
 
 ## Phase 2: deploy and scale with OpenTofu
 
-The OpenTofu configuration is in `opentofu`. It has its own local state file. In this repository, the earlier
-`linux-web-app` example may have stale state from a resource group that was deleted manually. State is local metadata,
-so removing stale entries does not delete Azure resources; it only makes the state truthful again.
+The OpenTofu configuration is in `opentofu`. The working directory matters: OpenTofu loads the `.tf` files and the
+default local state for the directory from which you run it. Run all commands in this section from
+`azure-labs/linux-web-app-scaling/opentofu`.
+
+### Configuration, Azure resources, and state are different things
+
+The `.tf` files describe the resources you want. Azure holds the actual resource group, plan, and app. OpenTofu state
+is a separate record that connects configuration addresses (such as `azurerm_service_plan.web_app_scaling`) to the
+real Azure resource IDs and remembers generated values such as the random web-app suffix. By default this state is a
+local file named `terraform.tfstate` in this working directory. It is not stored in Azure and is not recreated merely
+by running `tofu init`.
+
+Consequently, `tofu state list` returning **"No state file was found"** means OpenTofu has no state file in this
+directory. It does not mean the configuration is missing, and it does not query Azure to see whether resources exist.
+`tofu init` installs providers and initializes the working directory; it does not create resources or recover state.
+
+Choose the workflow that matches the situation:
+
+1. **The resource group and its resources were deleted.** This is a fresh deployment. Initialize, plan, inspect the
+   plan, then apply. Since there is no state, the plan should show new resources. Do not first run `state rm`; there
+   are no state entries to remove. If the resource group was deleted outside OpenTofu but a state file remains, back
+   up and inspect that state before deciding how to reconcile it.
+2. **The resources still exist and you are using another computer.** The configuration alone is insufficient. The
+   new computer needs the same state (including the random suffix) to manage those same resources. A local state file
+   on the first computer is not automatically available on the second. For ongoing multi-computer use, configure a
+   shared remote backend with locking and secure access, or deliberately import existing Azure resources into a
+   fresh state. Do not run a fresh apply with an empty state against resources that already exist: OpenTofu may try
+   to create duplicate names or report conflicts.
+3. **The resources still exist but state is missing.** Treat this as a recovery/import task, not a fresh deployment.
+   Back up any state you do have, identify the exact Azure resource IDs, and import/reconcile the resources before
+   applying. A plan must not propose replacing or duplicating live resources.
+
+### Check the working directory and state
+
+From the repository root in PowerShell, move to the OpenTofu directory and check for a state file before listing addresses:
+
+```powershell
+Set-Location .\azure-labs\linux-web-app-scaling\opentofu
+Get-Location
+Get-ChildItem -Force terraform.tfstate*
+tofu state list
+```
+
+If no state file exists and the Azure resource group is gone, continue with the fresh deployment below. If a state file
+exists, make a backup before state maintenance:
+
+```powershell
+$stateBackup = "terraform.tfstate.before-scaling-$(Get-Date -Format yyyyMMdd-HHmmss).bak"
+Copy-Item .\terraform.tfstate $stateBackup
+tofu state list
+```
+
+The old `linux-web-app` example has a separate working directory and separate local state. It does not share state with
+this scaling lab. Only if that old lab's Azure resources were deleted and its state still lists stale addresses, remove
+the stale entries from that lab's own `opentofu` directory after backing up its state. `tofu state rm` only forgets
+state entries; it does not delete Azure resources. Never remove entries for resources that still exist unless you are
+intentionally preparing to import them again.
+
+If you previously removed every address from a state but old outputs remain, those outputs are state data too. Back up
+and move aside that empty lab state file to clear its outputs. Keep the backup so it can be recovered if needed.
+
+### Ensure OpenTofu is available in the terminal
+
+Before running the workflow, check that the terminal can find OpenTofu:
+
+```powershell
+Get-Command tofu
+tofu version
+```
+
+If PowerShell says `tofu` is not recognized, install OpenTofu for Windows and add the directory containing `tofu.exe`
+to the Windows `PATH`. Then open a **new terminal tab** in GoLand and repeat these checks. A terminal inherits its
+environment when it starts, so restarting only the terminal tab after changing PATH is sufficient; restarting GoLand
+does not install OpenTofu or add it to PATH. You can also invoke `tofu.exe` by its full path while diagnosing PATH.
+The command must work in the same terminal session before the steps below will work.
+
+GoLand's terminal runs a shell (usually PowerShell) and inherits Windows environment variables. If `tofu` works in an
+external PowerShell but not GoLand, close that project's terminal tab, open a new one, and check its PATH. If it still
+fails, inspect GoLand's terminal shell settings and the PATH visible in that terminal; do not terminate other GoLand
+windows or processes.
 
 If you opened a new PowerShell session, repeat the subscription and name variables from the prerequisites and Phase 1
 before running the verification commands below.
-
-First create a backup and inspect the state. Run the state-removal commands only if the listed addresses are present
-and the Azure resource group was already deleted:
-
-```powershell
-Set-Location .\opentofu
-
-$stateBackup = "terraform.tfstate.before-scaling-$(Get-Date -Format yyyyMMdd-HHmmss).bak"
-if (Test-Path .\terraform.tfstate) {
-    Copy-Item .\terraform.tfstate $stateBackup
-}
-
-tofu state list
-```
-
-For the old `..\linux-web-app` state, inspect its list first. If it contains only the five resources from that lab and
-the Azure resource group no longer exists, remove those stale state entries from that lab's `opentofu` directory:
-
-```powershell
-Set-Location ..\..\linux-web-app\opentofu
-tofu state list
-tofu state rm azurerm_linux_web_app.web_app_lab
-tofu state rm azurerm_resource_group.web_app_lab
-tofu state rm azurerm_resource_group_template_deployment.web_app_basic_publishing_policies
-tofu state rm azurerm_service_plan.web_app_lab
-tofu state rm random_string.web_app_suffix
-
-Set-Location ..\..\linux-web-app-scaling\opentofu
-```
-
-If the base lab's `tofu state list` is empty but `tofu output` still shows old hostnames, move that now-empty state file
-to a recoverable backup. This removes stale outputs without deleting any Azure resource:
-
-```powershell
-Set-Location ..\..\linux-web-app\opentofu
-$addresses = @(tofu state list)
-if ($addresses.Count -eq 0 -and (Test-Path .\terraform.tfstate)) {
-    Move-Item .\terraform.tfstate ("terraform.tfstate.after-stale-cleanup-" + (Get-Date -Format yyyyMMdd-HHmmss) + ".bak")
-}
-Set-Location ..\..\linux-web-app-scaling\opentofu
-```
-
-For the scaling lab's previous partial state, remove only these entries after confirming they are the entries shown by
-`tofu state list` and that the old Azure group is gone:
-
-```powershell
-tofu state rm azurerm_resource_group.web_app_scaling
-tofu state rm random_string.web_app_suffix
-```
-
-Do not run `tofu state rm` as a substitute for deleting live Azure resources. It changes only local state. Conversely,
-do not run `tofu apply` while state still refers to a resource group that no longer exists: OpenTofu may try to update or
-destroy a stale object before it can converge.
 
 Initialize and validate the clean scaling configuration:
 

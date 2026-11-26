@@ -1,0 +1,14 @@
+resource_group_name     = "dca-tech-policy-rg"
+resource_group_location = "eastus"
+
+initiative_name         = "get-secure"
+initiative_display_name = "Get Secure"
+initiative_description  = "Audits Windows virtual machines that do not use Azure Disk Encryption or EncryptionAtHost."
+initiative_category     = "Compute"
+
+built_in_policy_definition_id = "/providers/Microsoft.Authorization/policyDefinitions/3dc5edcd-002d-444c-b216-e123bbfa37c0"
+
+assignment_name         = "get-secure-assignment"
+assignment_display_name = "Get Secure assignment"
+assignment_description  = "Assigns the Get Secure initiative to the lab resource group."
+non_compliance_message  = "Windows virtual machines should enable Azure Disk Encryption or EncryptionAtHost."

@@ -1,10 +1,10 @@
-# Index
+# Kubernetes Notes
 
-1. [Concepts](Concepts.md)
-2. [Virtualization, Containerization, and Elasticity](Virtualization,%20Containerization,%20and%20Elasticity.md)
-3. [See lab](https://github.com/yasuomaidana/kubernetes-lab)
+These notes cover Kubernetes fundamentals, local clusters, and Azure Container Registry Tasks. Browse the site sidebar for the individual topics.
 
-Additional Materials:
+For a hands-on cluster project, see the [Kubernetes lab repository](https://github.com/yasuomaidana/kubernetes-lab).
+
+## Additional learning resources
 
 - [Learn Kubernetes Basics (Kubernetes.io)](https://kubernetes.io/docs/tutorials/kubernetes-basics/)
 - [Learn Configuration (Kubernetes.io)](https://kubernetes.io/docs/tutorials/configuration/)

@@ -2,6 +2,8 @@
 
 Docker networking allows containers to communicate with each other, with the host machine, and with external networks. Understanding the different network drivers is key to managing container communication effectively.
 
+See the [Compose example](./docker-compose.yml), which uses the default project network.
+
 ---
 
 ## Common Network Drivers

@@ -31,8 +31,15 @@ Sources used to verify this:
 | [`azuredeploy.bicep`](./azuredeploy.bicep) | Subscription-scope deployment that creates the lab resource group, the `Get Secure` initiative, and the assignment. |
 | [`azuredeploy.bicepparam`](./azuredeploy.bicepparam) | Default lab values. |
 | [`modules/policy-assignment.bicep`](./modules/policy-assignment.bicep) | Reusable policy-assignment module. |
+| [`opentofu/README.md`](./opentofu/README.md) | Equivalent Azure Policy lab using OpenTofu and AzureRM. |
 | [`docs/policy-basics.md`](docs/policy-basics.md) | Short explanation of how this lab works and why the test VM becomes non-compliant instead of being denied. |
 | [`docs/azure-rbac-overview.md`](docs/azure-rbac-overview.md) | Summary of Azure RBAC, its core components, and how it differs from Azure Policy and legacy Azure Blueprints guidance. |
+
+## OpenTofu alternative
+
+The [OpenTofu lab](./opentofu/README.md) creates the same resource group, initiative, and assignment. These are
+alternative implementations with separate state; clean up the resources using the current tool before switching
+between them.
 
 ## Azure CLI quick reference
 
